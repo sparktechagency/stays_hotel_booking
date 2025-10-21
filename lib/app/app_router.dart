@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/create_new_password_screen.dart';
@@ -7,82 +7,192 @@ import 'package:stays_hotel_booking/features/auth/presentation/screens/sign_in_o
 import 'package:stays_hotel_booking/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_otp_screen.dart';
+import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_screen.dart';
+import 'package:stays_hotel_booking/features/favorite/presentation/screens/favorite_screens.dart';
 import 'package:stays_hotel_booking/features/home/presentation/screens/home_screen.dart';
 import 'package:stays_hotel_booking/features/onboarding/presentation/screen/onboarding_screen.dart';
+import 'package:stays_hotel_booking/features/profile/presentation/screens/profile_screen.dart';
 import 'package:stays_hotel_booking/features/splash/presentation/screens/splash_screen.dart';
 import 'package:stays_hotel_booking/features/subscription/presentation/screens/subscription_screen.dart';
+import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/hotel_details_screen.dart';
 
 class AppRoutes {
+  // Route names
   static const String splash = '/splash';
   static const String onboarding = '/onboarding';
   static const String signInOrRegister = '/sign-in-or-register';
   static const String registration = '/registration';
   static const String home = '/home';
-  static const String test = '/test';
   static const String subscription = '/subscription';
   static const String signIn = '/sign-in';
   static const String forgotPassword = '/forgot-password';
   static const String forgotOtp = '/forgot-otp';
   static const String createNewPassword = '/create-new-password';
+  static const String booking = '/booking';
+  static const String favorite = '/favorite';
+  static const String profile = '/profile';
+  static const String hotelDetails = '/hotel-details';
 
-  static final List<RouteBase> routes = <RouteBase>[
-    GoRoute(
-      path: splash,
-      name: 'splash',
-      builder: (BuildContext context, GoRouterState state) => const SplashScreen(),
-    ),
-    GoRoute(
-      path: onboarding,
-      name: 'onboarding',
-      builder: (BuildContext context, GoRouterState state) => const OnboardingScreen(),
-    ),
-    GoRoute(
-      path: signInOrRegister,
-      name: 'signInOrRegister',
-      builder: (BuildContext context, GoRouterState state) => const SignInOrRegisterScreen(),
-    ),
-    GoRoute(
-      path: registration,
-      name: 'registration',
-      builder: (BuildContext context, GoRouterState state) => const RegistrationScreen(),
-    ),
-    GoRoute(
-      path: home,
-      name: 'home',
-      builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
-    ),
-    GoRoute(
-      path: subscription,
-      name: 'subscription',
-      builder: (BuildContext context, GoRouterState state) => const SubscriptionScreen(),
-    ),
-    GoRoute(
-      path: signIn,
-      name: 'signIn',
-      builder: (BuildContext context, GoRouterState state) => const SignInScreen(),
-    ),
-    GoRoute(
-      path: forgotPassword,
-      name: 'forgotPassword',
-      builder: (BuildContext context, GoRouterState state) => const ForgotPasswordScreen(),
-    ),
-    GoRoute(
-      path: forgotOtp,
-      name: 'forgotOtp',
-      builder: (BuildContext context, GoRouterState state) => const ForgotOtpScreen(),
-    ),
+  // Router configuration
+  static final router = GoRouter(
+    initialLocation: splash,
+    routes: [
+      // Splash Screen
+      GoRoute(
+        path: splash,
+        name: 'splash',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SplashScreen(),
+        ),
+      ),
 
-    GoRoute(
-  path: createNewPassword,
-  name: 'createNewPassword',
-  builder: (context, state) => const CreateNewPasswordScreen(),
-),
-      ];
+      // Onboarding
+      GoRoute(
+        path: onboarding,
+        name: 'onboarding',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const OnboardingScreen(),
+        ),
+      ),
+
+      // Auth
+      GoRoute(
+        path: signInOrRegister,
+        name: 'signInOrRegister',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SignInOrRegisterScreen(),
+        ),
+      ),
+      GoRoute(
+        path: registration,
+        name: 'registration',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const RegistrationScreen(),
+        ),
+      ),
+      GoRoute(
+        path: signIn,
+        name: 'signIn',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SignInScreen(),
+        ),
+      ),
+      GoRoute(
+        path: forgotPassword,
+        name: 'forgotPassword',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const ForgotPasswordScreen(),
+        ),
+      ),
+      GoRoute(
+        path: forgotOtp,
+        name: 'forgotOtp',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const ForgotOtpScreen(),
+        ),
+      ),
+      GoRoute(
+        path: createNewPassword,
+        name: 'createNewPassword',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const CreateNewPasswordScreen(),
+        ),
+      ),
+
+      // Main App
+      GoRoute(
+        path: home,
+        name: 'home',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const HomeScreen(),
+        ),
+      ),
+      GoRoute(
+        path: hotelDetails,
+        name: 'hotel-details',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const HotelDetailsScreen(),
+        ),
+      ),
+
+      // Bottom Navigation
+      GoRoute(
+        path: booking,
+        name: 'booking',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const BookingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: favorite,
+        name: 'favorite',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const FavoriteScreens(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: profile,
+        name: 'profile',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ProfileScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, -1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+
+      // Subscription
+      GoRoute(
+        path: subscription,
+        name: 'subscription',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SubscriptionScreen(),
+        ),
+      ),
+    ],
+  );
 }
 
-final routerProvider = Provider<GoRouter>((ref) {
-  return GoRouter(
-    initialLocation: AppRoutes.splash,
-    routes: AppRoutes.routes,
-  );
-});
+// Provider for Riverpod
+final routerProvider = Provider<GoRouter>((ref) => AppRoutes.router);

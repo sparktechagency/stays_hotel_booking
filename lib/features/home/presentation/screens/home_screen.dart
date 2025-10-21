@@ -1,35 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stays_hotel_booking/app/app_router.dart';
+import 'package:stays_hotel_booking/component/bottomNav/common_bottom_nav_bar.dart';
 import 'package:stays_hotel_booking/component/button/common_button.dart';
+import 'package:stays_hotel_booking/component/image/common_image.dart';
 import 'package:stays_hotel_booking/component/text/common_text.dart';
 import 'package:stays_hotel_booking/component/text_field/common_text_field.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_colors.dart';
+import 'package:stays_hotel_booking/core/utils/constants/app_icons.dart';
+import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_strings.dart';
+import 'package:stays_hotel_booking/core/utils/extensions/extension.dart';
+import 'package:stays_hotel_booking/features/home/presentation/providers/home_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header Section
-            _buildHeader(),
-            
-            // Search Section
-            _buildSearchSection(),
-            
-            // Featured Deals Section
-            Expanded(
-              child: _buildFeaturedDealsSection(),
-            ),
-          ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          surfaceTintColor: AppColors.transparent,
+          shadowColor: AppColors.transparent,
+          backgroundColor: AppColors.white,
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigation(),
+      backgroundColor: AppColors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(gradient: AppColors.whiteBgGradient),
+          child: Column(
+            children: [
+              _buildHeader(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildSearchSection(ref),
+                      _buildFeaturedDealsSection(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: CommonBottomNavBar(currentIndex: 0),
     );
   }
 
@@ -37,76 +63,49 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Left side - Logo and savings
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CommonText(
-                  text: AppStrings.appName,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.base500,
-                ),
-                SizedBox(height: 4.h),
-                Row(
-                  children: [
-                    const CommonText(
-                      text: AppStrings.totalSavings,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
-                    ),
-                    SizedBox(width: 4.w),
-                    const CommonText(
-                      text: "\$1,234.56",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.base500,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          const CommonText(
+            text: AppStrings.appName,
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            color: AppColors.base500,
           ),
-          
-          // Right side - Notification and profile
           Row(
             children: [
-              Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.notifications_outlined,
-                  color: AppColors.black,
-                  size: 20,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const CommonText(
+                    text: AppStrings.totalSavings,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.text,
+                  ),
+                  const CommonText(
+                    text: "\$1,234.56",
+                    fontSize: 14,
+                    top: 3,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.text,
+                  ),
+                ],
               ),
-              SizedBox(width: 12.w),
-              Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: AppColors.base500,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.person,
-                  color: AppColors.white,
-                  size: 20,
-                ),
+              10.width,
+              Row(
+                children: [
+                  CommonImage(
+                    imageSrc: AppIcons.notification,
+                    width: 24.h,
+                    height: 24.h,
+                    fill: BoxFit.fill,
+                  ),
+                  SizedBox(width: 12.w),
+                  const CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage(AppImages.profile),
+                  ),
+                ],
               ),
             ],
           ),
@@ -115,75 +114,114 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchSection() {
+  Widget _buildSearchSection(WidgetRef ref) {
+    final checkIn = ref.watch(homeCheckInDateProvider);
+    final checkOut = ref.watch(homeCheckOutDateProvider);
+    final guests = ref.watch(homeGuestsProvider);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24.w),
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
+        border: Border.all(color: AppColors.filledColor),
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
+            color: Colors.black.withOpacity(0.15),
             offset: const Offset(0, 4),
+            blurRadius: 4,
           ),
         ],
       ),
       child: Column(
         children: [
-          // Search destinations
           CommonTextField(
             hintText: AppStrings.searchDestinations,
             prefixIcon: const Icon(Icons.search, color: AppColors.subTitle),
             borderColor: AppColors.filledColor,
-            fillColor: AppColors.filledColor,
+            fillColor: AppColors.transparent,
             borderRadius: 8,
+            onChanged: (value) =>
+                ref.read(homeSearchQueryProvider.notifier).state = value,
           ),
-          SizedBox(height: 16.h),
-          
-          // Check in and Check out
+          SizedBox(height: 12.h),
           Row(
             children: [
               Expanded(
                 child: CommonTextField(
                   hintText: AppStrings.checkIn,
-                  prefixIcon: const Icon(Icons.calendar_today, color: AppColors.subTitle),
+                  controller: TextEditingController(text: checkIn),
+                  prefixIcon: const Icon(
+                    Icons.calendar_month_outlined,
+                    color: AppColors.subTitle,
+                  ),
                   borderColor: AppColors.filledColor,
-                  fillColor: AppColors.filledColor,
+                  fillColor: AppColors.transparent,
                   borderRadius: 8,
+                  onTap: () async {
+                    final date = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 365)),
+                    );
+                    if (date != null) {
+                      ref.read(homeCheckInDateProvider.notifier).state =
+                          '${date.day}/${date.month}/${date.year}';
+                    }
+                  },
                 ),
               ),
               SizedBox(width: 12.w),
               Expanded(
                 child: CommonTextField(
                   hintText: AppStrings.checkOut,
-                  prefixIcon: const Icon(Icons.calendar_today, color: AppColors.subTitle),
+                  controller: TextEditingController(text: checkOut),
+                  prefixIcon: const Icon(
+                    Icons.calendar_month_outlined,
+                    color: AppColors.subTitle,
+                  ),
                   borderColor: AppColors.filledColor,
-                  fillColor: AppColors.filledColor,
+                  fillColor: AppColors.transparent,
                   borderRadius: 8,
+                  onTap: () async {
+                    final date = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now().add(const Duration(days: 1)),
+                      lastDate: DateTime.now().add(const Duration(days: 366)),
+                    );
+                    if (date != null) {
+                      ref.read(homeCheckOutDateProvider.notifier).state =
+                          '${date.day}/${date.month}/${date.year}';
+                    }
+                  },
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16.h),
-          
-          // Number of guests
+          SizedBox(height: 12.h),
           CommonTextField(
             hintText: AppStrings.numberOf,
+            controller: TextEditingController(text: guests),
             prefixIcon: const Icon(Icons.people, color: AppColors.subTitle),
             borderColor: AppColors.filledColor,
-            fillColor: AppColors.filledColor,
+            fillColor: AppColors.transparent,
             borderRadius: 8,
+            onChanged: (value) =>
+                ref.read(homeGuestsProvider.notifier).state = value,
           ),
-          SizedBox(height: 20.h),
-          
-          // Search button
+          SizedBox(height: 12.h),
           CommonButton(
             titleText: AppStrings.search,
             buttonHeight: 50,
             onTap: () {
-              // TODO: Implement search functionality
+              // Search functionality will use the values from the providers
+              // ref.read(searchNotifierProvider.notifier).searchHotels(
+              //   query: searchQuery,
+              //   checkIn: checkIn,
+              //   checkOut: checkOut,
+              //   guests: guests,
+              // );
             },
           ),
         ],
@@ -197,9 +235,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 24.h),
-          
-          // Featured Deals header
+          SizedBox(height: 20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -210,39 +246,35 @@ class HomeScreen extends StatelessWidget {
                 color: AppColors.black,
               ),
               Container(
-                width: 40.w,
-                height: 40.h,
+                width: 32.w,
+                height: 32.h,
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.base50,
                   borderRadius: BorderRadius.circular(8.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
                 ),
                 child: const Icon(
                   Icons.tune,
-                  color: AppColors.black,
+                  color: AppColors.base500,
                   size: 20,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16.h),
-          
-          // Hotel cards
-          Expanded(
-            child: ListView(
-              children: [
-                _buildHotelCard(),
-                SizedBox(height: 16.h),
-                _buildHotelCard(),
-                SizedBox(height: 16.h),
-                _buildHotelCard(),
-              ],
+
+    
+          SizedBox(height: 10.h),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 3, // Example: 3 hotel cards
+            itemBuilder: (context, index) => Padding(
+              padding: EdgeInsets.only(bottom: 16.h),
+              child: GestureDetector(
+                onTap: () {
+                 context.push(AppRoutes.hotelDetails);
+                },
+                child: _buildHotelCard(context),
+              ),
             ),
           ),
         ],
@@ -250,48 +282,40 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHotelCard() {
+  Widget _buildHotelCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AppColors.filledColor),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 4,
             offset: const Offset(0, 4),
           ),
         ],
       ),
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Hotel image with badges
           Stack(
             children: [
-              Container(
-                height: 200.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12.r),
-                    topRight: Radius.circular(12.r),
-                  ),
-                  color: AppColors.filledColor,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.hotel,
-                    size: 60,
-                    color: AppColors.subTitle,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: CommonImage(
+                    imageSrc: AppImages.hotelBooking,
+                    width: double.infinity,
+                    height: 200.h,
+                    fill: BoxFit.cover,
                   ),
                 ),
               ),
-              
-              // Discount badge
               Positioned(
-                top: 12.h,
-                left: 12.w,
+                top: 16.h,
+                left: 16.w,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   decoration: BoxDecoration(
@@ -301,27 +325,25 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
-                        Icons.percent,
-                        color: Colors.green,
-                        size: 12,
+                      CommonImage(
+                        height: 13,
+                        width: 13,
+                        imageSrc: AppImages.parcent,
                       ),
                       SizedBox(width: 4.w),
                       const CommonText(
                         text: AppStrings.upToOff,
                         fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.white,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.highlight,
                       ),
                     ],
                   ),
                 ),
               ),
-              
-              // Action buttons
               Positioned(
-                top: 12.h,
-                right: 12.w,
+                top: 16.h,
+                right: 16.w,
                 child: Row(
                   children: [
                     Container(
@@ -347,7 +369,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Icon(
                         Icons.favorite_border,
-                        color: AppColors.black,
+                        color: AppColors.base500,
                         size: 16,
                       ),
                     ),
@@ -356,65 +378,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          
-          // Hotel details
           Padding(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Hotel name
-                const CommonText(
-                  text: AppStrings.hotelBlueSky,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.black,
-                ),
-                SizedBox(height: 8.h),
-                
-                // Location and rating
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      color: AppColors.red,
-                      size: 16,
-                    ),
-                    SizedBox(width: 4.w),
-                    const CommonText(
-                      text: AppStrings.africaCity,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
-                    ),
-                    SizedBox(width: 16.w),
-                    const Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                      size: 16,
-                    ),
-                    SizedBox(width: 4.w),
-                    const CommonText(
-                      text: "4.7/10",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                
-                // Description
-                const CommonText(
-                  text: AppStrings.hotelDescription,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.subTitle,
-                  maxLines: 2,
-                ),
-                SizedBox(height: 12.h),
-                
-                // Price and share
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -422,12 +390,80 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const CommonText(
-                          text: "\$587",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.subTitle,
-                          underline: true,
+                          text: AppStrings.hotelBlueSky,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.text,
                         ),
+                        SizedBox(height: 4.h),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              color: AppColors.red,
+                              size: 16.sp,
+                            ),
+                            SizedBox(width: 4.w),
+                            const CommonText(
+                              text: AppStrings.africaCity,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.subTitle,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 6.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.white500,
+                        borderRadius: BorderRadius.circular(23.r),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.amber, size: 18),
+                          SizedBox(width: 4.w),
+                          const CommonText(
+                            text: "4.7/10",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.h),
+                const CommonText(
+                  text: AppStrings.hotelDescription,
+                  fontSize: 12,
+                  textAlign: TextAlign.start,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.subTitle,
+                  maxLines: 2,
+                ),
+                SizedBox(height: 6.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Public: \$587",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.lineThrough,
+                            color: AppColors.subTitle,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
                         const CommonText(
                           text: AppStrings.staysPrice,
                           fontSize: 16,
@@ -437,83 +473,26 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      width: 40.w,
-                      height: 40.h,
+                      width: 32.w,
+                      height: 32.h,
                       decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.white500,
                       ),
-                      child: const Icon(
-                        Icons.share,
-                        color: AppColors.white,
-                        size: 20,
+                      child: Image.asset(
+                        AppImages.share,
+                        height: 16.h,
+                        width: 16.w,
                       ),
                     ),
                   ],
                 ),
+                SizedBox(height: 8.h),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildBottomNavigation() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(AppStrings.home, Icons.home, true),
-              _buildNavItem(AppStrings.booking, Icons.calendar_today, false),
-              _buildNavItem(AppStrings.favourites, Icons.favorite_border, false),
-              _buildNavItem(AppStrings.profile, Icons.person_outline, false),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(String label, IconData icon, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 4.w,
-          height: 4.h,
-          decoration: BoxDecoration(
-            color: isSelected ? AppColors.base500 : AppColors.transparent,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(height: 4.h),
-        Icon(
-          icon,
-          color: isSelected ? AppColors.base500 : AppColors.subTitle,
-          size: 24.sp,
-        ),
-        SizedBox(height: 4.h),
-        CommonText(
-          text: label,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: isSelected ? AppColors.base500 : AppColors.subTitle,
-        ),
-      ],
     );
   }
 }

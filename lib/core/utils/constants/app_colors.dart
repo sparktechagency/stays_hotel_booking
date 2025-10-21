@@ -21,6 +21,7 @@ class AppColors {
     static const Color text=Color(0xff1B1B1B);
     static const Color subTitle=Color(0xFF494949);
     static const Color green=Color(0xFF6AA259);
+    static const Color highlight=Color(0xFFB6E101);
 
 
   // Splash gradient backgroun color
@@ -44,6 +45,17 @@ static const RadialGradient splashRadialGradient = RadialGradient(
     0.415,   
     1.0,    
   ],
+);
+
+// White BG gradient (from design)
+static const Color whiteBgStart = Color(0xFFFDFBFB);
+static const Color whiteBgMiddle = Color(0xFFFFFFFF);
+static const Color whiteBgEnd = Color(0xFFF4F4F4);
+
+static const LinearGradient whiteBgGradient = LinearGradient(
+  colors: [whiteBgStart, whiteBgMiddle, whiteBgEnd],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
 );
 
 

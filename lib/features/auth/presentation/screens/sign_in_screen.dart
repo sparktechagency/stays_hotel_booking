@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -21,8 +22,10 @@ class SignInScreen extends ConsumerStatefulWidget {
 }
 
 class _SignInScreenState extends ConsumerState<SignInScreen> {
-  final emailCtrl = TextEditingController();
-  final passwordCtrl = TextEditingController();
+  final emailCtrl = TextEditingController(
+    text: kDebugMode? "chironjit@gmail.com": null,
+  );
+  final passwordCtrl = TextEditingController(text: kDebugMode? "hello123": null);
   bool rememberMe = false;
   final formKey = GlobalKey<FormState>();
 

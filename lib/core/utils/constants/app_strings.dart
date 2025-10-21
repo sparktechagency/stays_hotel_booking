@@ -68,7 +68,7 @@ class AppStrings {
   static const String hotelBlueSky = "Hotel Blue sky";
   static const String africaCity = "Africa City";
   static const String hotelDescription = "The ideal place for those looking for a luxurious and tranquil holiday experience with stunning...Read More";
-  static const String staysPrice = "STAYS: \$470/date";
+  static const String staysPrice = "STAYS: \$470/";
   static const String home = "Home";
   static const String booking = "Booking";
   static const String favourites = "Favourites";

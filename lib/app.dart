@@ -9,7 +9,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(routerProvider);
 
     return ScreenUtilInit(
       designSize: const Size(430, 932),
@@ -18,7 +17,8 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: true,
       builder: (_, __) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        routerConfig: router,
+
+        routerConfig: AppRoutes.router,
         theme: themeData,
       ),
     );
