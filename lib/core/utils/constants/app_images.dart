@@ -19,6 +19,7 @@ class AppImages {
   static const String hotelBooking4 = "$baseurl/hote_booking4.png";
   static const String map = "$baseurl/map.png";
   static const String bottomBg = "$baseurl/bottom_bg.png";
+  static const String bookingSuccess = "$baseurl/booking_success.png";
 
   //=========bottom nav bar
   static const String homeActive = "$baseurl/home_active.png";

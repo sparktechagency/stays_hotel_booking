@@ -74,4 +74,8 @@ class AppStrings {
   static const String favourites = "Favourites";
   static const String profile = "Profile";
 
+  // Booking Success Bottom Sheet
+  static const String bookingSuccessTitle = "Booking Successful!";
+  static const String bookingSuccessMessage = "Welcome to our residence. Please Kindly wait for residence key handover.";
+  static const String bookingListCta = "Booking List";
 }

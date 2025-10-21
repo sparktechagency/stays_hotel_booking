@@ -15,6 +15,7 @@ import 'package:stays_hotel_booking/features/profile/presentation/screens/profil
 import 'package:stays_hotel_booking/features/splash/presentation/screens/splash_screen.dart';
 import 'package:stays_hotel_booking/features/subscription/presentation/screens/subscription_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/hotel_details_screen.dart';
+import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/click_reserve_screen.dart';
 
 class AppRoutes {
   // Route names
@@ -32,6 +33,7 @@ class AppRoutes {
   static const String favorite = '/favorite';
   static const String profile = '/profile';
   static const String hotelDetails = '/hotel-details';
+  static const String clickReserve = '/click-reserve';
 
   // Router configuration
   static final router = GoRouter(
@@ -107,13 +109,24 @@ class AppRoutes {
         ),
       ),
 
-      // Main App
-      GoRoute(
+ 
+
+        GoRoute(
         path: home,
         name: 'home',
-        pageBuilder: (context, state) => MaterialPage(
+        pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
           child: const HomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
         ),
       ),
       GoRoute(
@@ -122,6 +135,14 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const HotelDetailsScreen(),
+        ),
+      ),
+      GoRoute(
+        path: clickReserve,
+        name: 'click-reserve',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const ClickReserveScreen(),
         ),
       ),
 
@@ -151,7 +172,7 @@ class AppRoutes {
           key: state.pageKey,
           child: const FavoriteScreens(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0);
+            const begin = Offset(0.0, 0.0);
             const end = Offset.zero;
             const curve = Curves.easeInOut;
             var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
@@ -169,7 +190,7 @@ class AppRoutes {
           key: state.pageKey,
           child: const ProfileScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, -1.0);
+            const begin = Offset(0.0, 0.0);
             const end = Offset.zero;
             const curve = Curves.easeInOut;
             var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
