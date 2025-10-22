@@ -15,9 +15,11 @@ import 'package:stays_hotel_booking/features/home/presentation/screens/home_scre
 import 'package:stays_hotel_booking/features/onboarding/presentation/screen/onboarding_screen.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/screens/personal_information_screen.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/screens/profile_screen.dart';
+import 'package:stays_hotel_booking/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:stays_hotel_booking/features/search/presentation/screens/search_results_screen.dart';
 import 'package:stays_hotel_booking/features/splash/presentation/screens/splash_screen.dart';
 import 'package:stays_hotel_booking/features/subscription/presentation/screens/subscription_screen.dart';
+import 'package:stays_hotel_booking/features/my_plan/presentation/screens/my_plan_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/hotel_details_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/click_reserve_screen.dart';
 
@@ -33,6 +35,7 @@ class AppRoutes {
   static const String forgotPassword = '/forgot-password';
   static const String searchResults = '/search-results';
   static const String personalInformation = '/personal-information';
+  static const String editProfile = '/edit-profile';
   static const String forgotOtp = '/forgot-otp';
   static const String createNewPassword = '/create-new-password';
   static const String booking = '/booking';
@@ -42,6 +45,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String hotelDetails = '/hotel-details';
   static const String clickReserve = '/click-reserve';
+  static const String myPlan = '/my-plan';
 
   // Router configuration
   static final router = GoRouter(
@@ -117,6 +121,14 @@ class AppRoutes {
         ),
       ),
       GoRoute(
+        path: editProfile,
+        name: 'editProfile',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const EditProfileScreen(),
+        ),
+      ),
+      GoRoute(
         path: forgotOtp,
         name: 'forgotOtp',
         pageBuilder: (context, state) => MaterialPage(
@@ -130,6 +142,14 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const CreateNewPasswordScreen(),
+        ),
+      ),
+      GoRoute(
+        path: myPlan,
+        name: 'myPlan',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const MyPlanScreen(),
         ),
       ),
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stays_hotel_booking/app/app_router.dart';
 import 'package:stays_hotel_booking/component/button/common_button.dart';
 import 'package:stays_hotel_booking/component/image/common_image.dart';
 import 'package:stays_hotel_booking/component/text/common_text.dart';
@@ -103,10 +104,10 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         SizedBox(width: 16.w),
         const Expanded(
           child: CommonText(
-            text: AppStrings.personalInformation,
+            text: AppStrings.personalInformationTitle,
             fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: AppColors.black,
+            fontWeight: FontWeight.w500,
+            color: AppColors.text,
           ),
         ),
       ],
@@ -114,88 +115,111 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
   }
 
   Widget _buildProfileSummaryCard(PersonalInfoState state) {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.all(20.w),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.12),
+                blurRadius: 4,
+                offset: const Offset(0, 0),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          // Profile Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: CommonImage(
-              imageSrc: AppImages.profile,
-              width: 80.w,
-              height: 80.h,
-              fill: BoxFit.cover,
-            ),
-          ),
-          
-          SizedBox(width: 16.w),
-          
-          // User Info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonText(
-                  text: state.user.name,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.black,
+          child: Row(
+            children: [
+              // Profile Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(999),
+                child: CommonImage(
+                  imageSrc: AppImages.profile,
+                  width: 80.w,
+                  height: 80.h,
+                  fill: BoxFit.cover,
                 ),
-                SizedBox(height: 4.h),
-                CommonText(
-                  text: state.user.email,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.subTitle,
+              ),
+              
+              SizedBox(width: 16.w),
+              
+              // User Info
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      text: state.user.name,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.text,
+                    ),
+                    SizedBox(height: 8.h),
+                    CommonText(
+                      text: state.user.email,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.subTitle,
+                    ),
+                  ],
                 ),
-              ],
+              ),
+              
+          ],
+          ),
+        ),
+     
+     
+     
+     Positioned(
+      bottom: 8,
+      right: 8,
+      child: GestureDetector(
+        onTap: () => context.push(AppRoutes.editProfile),
+        child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical:8.h),
+        decoration: BoxDecoration(
+          color: AppColors.base50,
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.person, color: AppColors.base500, size: 12),
+            SizedBox(width: 2.w),
+            CommonText(
+              text: AppStrings.editProfile,
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: AppColors.base500,
             ),
-          ),
-          
-          // Edit Profile Button
-          CommonButton(
-            titleText: AppStrings.editProfile,
-            buttonHeight: 36,
-            buttonWidth: 100,
-            titleSize: 12,
-            onTap: () {
-              ref.read(personalInfoNotifierProvider.notifier).toggleEditing();
-            },
-          ),
-        ],
-      ),
+          ],
+        ),
+             ),
+      ))
+     
+      ],
     );
   }
 
   Widget _buildAboutSection(PersonalInfoState state) {
     return Container(
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 4,
+            offset: const Offset(0, 0),
           ),
         ],
       ),
       child: CommonText(
         text: state.about,
-        fontSize: 14,
+        fontSize: 13,
         fontWeight: FontWeight.w400,
         color: AppColors.subTitle,
         maxLines: 10,
@@ -293,8 +317,8 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
     return CommonText(
       text: label,
       fontSize: 16,
-      fontWeight: FontWeight.w700,
-      color: AppColors.black,
+      fontWeight: FontWeight.w500,
+      color: AppColors.text,
     );
   }
 

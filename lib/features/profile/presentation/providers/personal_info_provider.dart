@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stays_hotel_booking/features/profile/domain/models/user_model.dart';
+import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 
 // Personal information state
 class PersonalInfoState {
@@ -50,7 +51,7 @@ class PersonalInfoNotifier extends StateNotifier<PersonalInfoState> {
         id: '1',
         name: 'Liam Johnson',
         email: 'liamjohnson@gmail.com',
-        profileImageUrl: 'assets/images/profile_placeholder.png',
+        profileImageUrl: AppImages.profile,
       ),
       fullName: 'Liam Johnson',
       email: 'liam@gmail.com',
@@ -97,6 +98,16 @@ class PersonalInfoNotifier extends StateNotifier<PersonalInfoState> {
         isEditing: false,
       );
     });
+  }
+
+  void updateProfileImage(String path) {
+    final updatedUser = UserModel(
+      id: state.user.id,
+      name: state.user.name,
+      email: state.user.email,
+      profileImageUrl: path,
+    );
+    state = state.copyWith(user: updatedUser);
   }
 
   void cancelEditing() {

@@ -41,7 +41,10 @@ class CommonImage extends StatelessWidget {
   }
 
   Widget _buildErrorWidget() {
-    return Image.asset(defaultImage);
+    if (defaultImage.isNotEmpty) {
+      return Image.asset(defaultImage);
+    }
+    return const SizedBox.shrink();
   }
 
   Widget _buildNetworkImage() {

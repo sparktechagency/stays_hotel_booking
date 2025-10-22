@@ -161,7 +161,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
            ...List.generate(
              items.length,
              (index) => GestureDetector(
-               onTap: () => _handleMenuTap(index,items[index]),
+               onTap: () => _handleMenuTap(title,index,items[index]),
                child: ProfileMenuItemWidget(
                  menuItem: items[index],
                  isLastItem: index == items.length - 1,
@@ -173,14 +173,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  void _handleMenuTap(int index,dynamic menuItem) {
+  void _handleMenuTap(String title, int index,dynamic menuItem) {
 
-
-    if (index == 0) {
+    if(title == AppStrings.personalInformation){
+      if (index == 0) {
       context.push(AppRoutes.personalInformation);
-    } else {
+    } else if(index == 1) {
+      context.push(AppRoutes.myPlan);
     
-      menuItem.onTap();
+   
     }
+    }
+
+
+    
   }
 }
