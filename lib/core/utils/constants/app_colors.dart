@@ -22,6 +22,7 @@ class AppColors {
     static const Color subTitle=Color(0xFF494949);
     static const Color green=Color(0xFF6AA259);
     static const Color highlight=Color(0xFFB6E101);
+    static const Color black100=Color(0xFFB8B8B8);
 
 
   // Splash gradient backgroun color

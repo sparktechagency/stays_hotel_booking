@@ -8,9 +8,12 @@ import 'package:stays_hotel_booking/features/auth/presentation/screens/sign_in_s
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_otp_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_screen.dart';
+import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_payment_screen.dart';
+import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_details_screen.dart';
 import 'package:stays_hotel_booking/features/favorite/presentation/screens/favorite_screens.dart';
 import 'package:stays_hotel_booking/features/home/presentation/screens/home_screen.dart';
 import 'package:stays_hotel_booking/features/onboarding/presentation/screen/onboarding_screen.dart';
+import 'package:stays_hotel_booking/features/profile/presentation/screens/personal_information_screen.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/screens/profile_screen.dart';
 import 'package:stays_hotel_booking/features/search/presentation/screens/search_results_screen.dart';
 import 'package:stays_hotel_booking/features/splash/presentation/screens/splash_screen.dart';
@@ -29,9 +32,12 @@ class AppRoutes {
   static const String signIn = '/sign-in';
   static const String forgotPassword = '/forgot-password';
   static const String searchResults = '/search-results';
+  static const String personalInformation = '/personal-information';
   static const String forgotOtp = '/forgot-otp';
   static const String createNewPassword = '/create-new-password';
   static const String booking = '/booking';
+  static const String bookingPayment = '/booking-payment';
+  static const String bookingDetails = '/booking-details';
   static const String favorite = '/favorite';
   static const String profile = '/profile';
   static const String hotelDetails = '/hotel-details';
@@ -100,6 +106,14 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const SearchResultsScreen(),
+        ),
+      ),
+      GoRoute(
+        path: personalInformation,
+        name: 'personalInformation',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const PersonalInformationScreen(),
         ),
       ),
       GoRoute(
@@ -176,6 +190,14 @@ class AppRoutes {
         ),
       ),
       GoRoute(
+        path: bookingDetails,
+        name: 'bookingDetails',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const BookingDetailsScreen(),
+        ),
+      ),
+      GoRoute(
         path: favorite,
         name: 'favorite',
         pageBuilder: (context, state) => CustomTransitionPage(
@@ -191,6 +213,14 @@ class AppRoutes {
               child: child,
             );
           },
+        ),
+      ),
+      GoRoute(
+        path: bookingPayment,
+        name: 'bookingPayment',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const BookingPaymentScreen(),
         ),
       ),
       GoRoute(

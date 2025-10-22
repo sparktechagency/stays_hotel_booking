@@ -106,4 +106,26 @@ class AppStrings {
   static const String privacyPolicy = "Privacy Policy";
   static const String termsConditions = "Terms & Conditions";
   static const String logout = "Logout";
+
+  // Booking Details
+  static const String hotelBlueSkyDetails = "Hotel Blue Sky Details";
+  static const String bookingInformation = "Booking Information";
+  static const String bookingId = "Booking ID";
+  static const String totalPerson = "Total Person";
+  static const String date = "Date";
+  static const String totalTime = "Total Time";
+  static const String amount = "Amount";
+  static const String pending = "Pending";
+  static const String cardPayment = "card payment";
+  static const String applePay = "Apple pay";
+  static const String contactInformation = "Contact Information";
+  static const String cancel = "Cancel";
+
+   static const String editProfile = "Edit Profile";
+  static const String aboutText = "Hello there! I'm Liam, traveler with a passion for discovering hidden gems and authentic local experiences. Equally at home on business trips, always seeking comfortable stays and unique hotel offerings that create memorable journeys.";
+  static const String fullName = "Full Name";
+  static const String address = "Address";
+  static const String liamJohnsonFull = "Liam Johnson";
+  static const String liamEmailShort = "liam@gmail.com";
+  static const String liamAddress = "297 Westheimer Rd. Santa Ana";
 }

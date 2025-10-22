@@ -7,9 +7,12 @@ import 'package:stays_hotel_booking/component/text/common_text.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_colors.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_strings.dart';
+import 'package:stays_hotel_booking/core/utils/extensions/extension.dart';
+import 'package:stays_hotel_booking/app/app_router.dart';
 import 'package:stays_hotel_booking/features/profile/domain/models/user_model.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/providers/profile_provider.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/widgets/profile_menu_item_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -145,16 +148,39 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               color: AppColors.black,
             ),
           ),
-          // Items
-          ...List.generate(
-            items.length,
-            (index) => ProfileMenuItemWidget(
-              menuItem: items[index],
-              isLastItem: index == items.length - 1,
+          3.height,
+               Divider(
+              height: 1,
+              thickness: 1,
+            
+            
+              color: AppColors.white500,
             ),
-          ),
+        
+           // Items
+           ...List.generate(
+             items.length,
+             (index) => GestureDetector(
+               onTap: () => _handleMenuTap(index,items[index]),
+               child: ProfileMenuItemWidget(
+                 menuItem: items[index],
+                 isLastItem: index == items.length - 1,
+               ),
+             ),
+           ),
         ],
       ),
     );
+  }
+
+  void _handleMenuTap(int index,dynamic menuItem) {
+
+
+    if (index == 0) {
+      context.push(AppRoutes.personalInformation);
+    } else {
+    
+      menuItem.onTap();
+    }
   }
 }
