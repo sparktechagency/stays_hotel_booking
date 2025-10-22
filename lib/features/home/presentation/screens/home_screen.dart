@@ -136,15 +136,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       child: Column(
         children: [
-          CommonTextField(
-            hintText: AppStrings.searchDestinations,
-            prefixIcon: const Icon(Icons.search, color: AppColors.subTitle),
-            borderColor: AppColors.filledColor,
-            fillColor: AppColors.transparent,
-            borderRadius: 8,
-            onChanged: (value) =>
-                ref.read(homeSearchQueryProvider.notifier).state = value,
-          ),
+            CommonTextField(
+              hintText: AppStrings.searchDestinations,
+              prefixIcon: const Icon(Icons.search, color: AppColors.subTitle),
+              borderColor: AppColors.filledColor,
+              fillColor: AppColors.transparent,
+              borderRadius: 8,
+              onTap: () => context.push(AppRoutes.searchResults),
+              onChanged: (value) =>
+                  ref.read(homeSearchQueryProvider.notifier).state = value,
+            ),
           SizedBox(height: 12.h),
           Row(
             children: [

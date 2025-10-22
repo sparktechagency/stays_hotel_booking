@@ -12,6 +12,7 @@ import 'package:stays_hotel_booking/features/favorite/presentation/screens/favor
 import 'package:stays_hotel_booking/features/home/presentation/screens/home_screen.dart';
 import 'package:stays_hotel_booking/features/onboarding/presentation/screen/onboarding_screen.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/screens/profile_screen.dart';
+import 'package:stays_hotel_booking/features/search/presentation/screens/search_results_screen.dart';
 import 'package:stays_hotel_booking/features/splash/presentation/screens/splash_screen.dart';
 import 'package:stays_hotel_booking/features/subscription/presentation/screens/subscription_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/hotel_details_screen.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const String subscription = '/subscription';
   static const String signIn = '/sign-in';
   static const String forgotPassword = '/forgot-password';
+  static const String searchResults = '/search-results';
   static const String forgotOtp = '/forgot-otp';
   static const String createNewPassword = '/create-new-password';
   static const String booking = '/booking';
@@ -90,6 +92,14 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const ForgotPasswordScreen(),
+        ),
+      ),
+      GoRoute(
+        path: searchResults,
+        name: 'searchResults',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SearchResultsScreen(),
         ),
       ),
       GoRoute(

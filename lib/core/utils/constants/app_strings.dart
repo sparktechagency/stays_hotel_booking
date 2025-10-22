@@ -78,4 +78,32 @@ class AppStrings {
   static const String bookingSuccessTitle = "Booking Successful!";
   static const String bookingSuccessMessage = "Welcome to our residence. Please Kindly wait for residence key handover.";
   static const String bookingListCta = "Booking List";
+
+  // Search Results Screen
+  static const String searchResults = "Search Results";
+  static const String searchHint = "Search...";
+  static const String placesFound = "1,256 places";
+  static const String luxuryHotel = "Luxury Hotel";
+  static const String fourSeasons = "Four Seasons";
+  static const String peninsulaHotels = "Peninsula Hotels";
+  static const String palmSpringsCA = "Palm Springs, CA";
+  static const String night = "/night";
+
+  // Profile Screen
+  static const String liamJohnson = "Liam Johnson";
+  static const String liamEmail = "liamjohnson@gmail.com";
+  static const String personalInformation = "PERSONAL INFORMATION";
+  static const String myProfile = "Profile";
+  static const String myPlan = "My Plan";
+  static const String myBooking = "My booking";
+  static const String totalSaved = "Total saved";
+  static const String inviteMember = "Invite member";
+  static const String setting = "SETTING";
+  static const String changePassword = "Change Password";
+  static const String language = "Language";
+  static const String faq = "FAQ";
+  static const String aboutUs = "About Us";
+  static const String privacyPolicy = "Privacy Policy";
+  static const String termsConditions = "Terms & Conditions";
+  static const String logout = "Logout";
 }
