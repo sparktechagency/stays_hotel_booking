@@ -26,7 +26,7 @@ class BookingPaymentScreen extends ConsumerWidget {
       extendBody: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.whiteBgStart,
+        backgroundColor: AppColors.bg,
         centerTitle: true,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -42,7 +42,7 @@ class BookingPaymentScreen extends ConsumerWidget {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: AppColors.whiteBgGradient),
+        decoration: BoxDecoration(color: AppColors.bg),
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           child: Column(
@@ -62,7 +62,7 @@ class BookingPaymentScreen extends ConsumerWidget {
                         text: 'Hotel Blue sky',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: AppColors.text,
                       ),
                       SizedBox(height: 4),
                       Row(
@@ -112,7 +112,7 @@ class BookingPaymentScreen extends ConsumerWidget {
                 text: AppStrings.bookingInformation,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: AppColors.text,
               ),
               10.height,
 
@@ -159,8 +159,8 @@ class BookingPaymentScreen extends ConsumerWidget {
               child: OutlinedButton(
                 onPressed: () => context.pop(),
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: AppColors.base50,
-                  side: const BorderSide(color: AppColors.base50),
+                  backgroundColor: AppColors.black400,
+                  side: const BorderSide(color: AppColors.black400),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
                   padding: EdgeInsets.symmetric(vertical: 4.h),
                 ),
@@ -194,7 +194,7 @@ class BookingPaymentScreen extends ConsumerWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.overlayBox,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -252,7 +252,7 @@ class BookingPaymentScreen extends ConsumerWidget {
                     text: 'Give us rating out of 5!',
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.text,
                     textAlign: TextAlign.center,
                   ),
                   8.height,
@@ -266,7 +266,7 @@ class BookingPaymentScreen extends ConsumerWidget {
                         icon: Icon(
                           filled ? Icons.star : Icons.star_border,
                           size: 28,
-                          color: filled ? Colors.amber : const Color(0xFFC7C7CC),
+                          color: filled ? AppColors.white600 : const Color(0xFFC7C7CC),
                         ),
                       );
                     }),
@@ -408,7 +408,7 @@ class _SelectedPaymentView extends ConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF1F1F1),
+        color: AppColors.overlayBox,
         borderRadius: BorderRadius.circular(4.r),
         border: Border.all(color: Colors.transparent),
       ),
@@ -424,14 +424,22 @@ class _SelectedPaymentView extends ConsumerWidget {
               color: AppColors.text,
             ),
           ),
-          SizedBox(
+          Container(
+            padding: EdgeInsets.all(4.r),
             height: 24.h,
             width: 24.h,
-            child: Radio<String>(
-              value: selected,
-              groupValue: selected,
-              onChanged: null, // read-only
-              activeColor: AppColors.text,
+
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                  width: 2,
+                  color: AppColors.white500)
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.white500
+              ),
             ),
           ),
         ],

@@ -23,7 +23,7 @@ class CommonBottomNavBar extends StatefulWidget {
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   var bottomNavIndex = 0;
   List unselectedIcons = [
-   AppImages.homeInactive,
+   AppIcons.homeInactive,
    AppIcons.bookingInactive,
    AppIcons.favInactive,
    AppIcons.profileInactive
@@ -31,17 +31,17 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
 
   List selectedIcons = [
    AppIcons.homeActive,
-   AppImages.bookingActive,
-   AppImages.favActive,
+   AppIcons.bookingWhiteActive,
+    AppIcons.favWhiteActive,
    AppIcons.profileActive
   ];
 
-  List title = [
-    "Home",
-    "My Reservation",
-    "Favorite",
-    "Profile",
-  ];
+  // List title = [
+  //   "Home",
+  //   "My Reservation",
+  //   "Favorite",
+  //   "Profile",
+  // ];
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
         alignment: Alignment.center,
         padding: EdgeInsets.all(0.sp),
         decoration: BoxDecoration(
-            color: AppColors.transparent,
+            color: AppColors.bg
           ) , child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(

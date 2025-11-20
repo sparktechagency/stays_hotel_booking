@@ -10,6 +10,16 @@ import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_ot
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_payment_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_details_screen.dart';
+import 'package:stays_hotel_booking/features/booking/presentation/screens/my_booking_screen.dart';
+import 'package:stays_hotel_booking/features/saved/presentation/screens/total_saved_screen.dart';
+import 'package:stays_hotel_booking/features/invite/presentation/screens/invite_member_screen.dart';
+import 'package:stays_hotel_booking/features/auth/presentation/screens/change_password_screen.dart';
+import 'package:stays_hotel_booking/features/language/presentation/screens/language_screen.dart';
+import 'package:stays_hotel_booking/features/faq/presentation/screens/faq_screen.dart';
+import 'package:stays_hotel_booking/features/about/presentation/screens/about_us_screen.dart';
+import 'package:stays_hotel_booking/features/privacy/presentation/screens/privacy_policy_screen.dart';
+import 'package:stays_hotel_booking/features/terms/presentation/screens/terms_conditions_screen.dart';
+import 'package:stays_hotel_booking/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:stays_hotel_booking/features/favorite/presentation/screens/favorite_screens.dart';
 import 'package:stays_hotel_booking/features/home/presentation/screens/home_screen.dart';
 import 'package:stays_hotel_booking/features/onboarding/presentation/screen/onboarding_screen.dart';
@@ -41,11 +51,22 @@ class AppRoutes {
   static const String booking = '/booking';
   static const String bookingPayment = '/booking-payment';
   static const String bookingDetails = '/booking-details';
+  static const String myBooking = '/my-booking';
+  static const String totalSaved = '/total-saved';
+  static const String inviteMember = '/invite-member';
+  static const String changePassword = '/change-password';
+  static const String language = '/language';
+  static const String faq = '/faq';
+  static const String aboutUs = '/about-us';
+  static const String privacyPolicy = '/privacy-policy';
+  static const String termsConditions = '/terms-conditions';
+  static const String notifications = '/notifications';
   static const String favorite = '/favorite';
   static const String profile = '/profile';
   static const String hotelDetails = '/hotel-details';
   static const String clickReserve = '/click-reserve';
   static const String myPlan = '/my-plan';
+  static const String staysWeb = '/stays-web';
 
   // Router configuration
   static final router = GoRouter(
@@ -68,6 +89,16 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const OnboardingScreen(),
+        ),
+      ),
+
+      // Stays WebView
+      GoRoute(
+        path: staysWeb,
+        name: 'staysWeb',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const StaysWebViewScreen(),
         ),
       ),
 
@@ -215,6 +246,86 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const BookingDetailsScreen(),
+        ),
+      ),
+      GoRoute(
+        path: myBooking,
+        name: 'myBooking',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const MyBookingScreen(),
+        ),
+      ),
+      GoRoute(
+        path: totalSaved,
+        name: 'totalSaved',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const TotalSavedScreen(),
+        ),
+      ),
+      GoRoute(
+        path: inviteMember,
+        name: 'inviteMember',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const InviteMemberScreen(),
+        ),
+      ),
+      GoRoute(
+        path: changePassword,
+        name: 'changePassword',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const ChangePasswordScreen(),
+        ),
+      ),
+      GoRoute(
+        path: language,
+        name: 'language',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const LanguageScreen(),
+        ),
+      ),
+      GoRoute(
+        path: faq,
+        name: 'faq',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const FaqScreen(),
+        ),
+      ),
+      GoRoute(
+        path: aboutUs,
+        name: 'aboutUs',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const AboutUsScreen(),
+        ),
+      ),
+      GoRoute(
+        path: privacyPolicy,
+        name: 'privacyPolicy',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const PrivacyPolicyScreen(),
+        ),
+      ),
+      GoRoute(
+        path: termsConditions,
+        name: 'termsConditions',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const TermsConditionsScreen(),
+        ),
+      ),
+      GoRoute(
+        path: notifications,
+        name: 'notifications',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const NotificationsScreen(),
         ),
       ),
       GoRoute(

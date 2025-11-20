@@ -17,7 +17,7 @@ class BookingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(30),
 
@@ -25,7 +25,7 @@ class BookingScreen extends ConsumerWidget {
           surfaceTintColor: Colors.transparent,
           shadowColor: AppColors.transparent,
           elevation: 0,
-          backgroundColor: const Color(0xFFFDFBFB),
+          backgroundColor: AppColors.bg,
           centerTitle: true,
           automaticallyImplyLeading: false,
           title: const CommonText(
@@ -38,7 +38,7 @@ class BookingScreen extends ConsumerWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: AppColors.whiteBgGradient,
+          color: AppColors.bg
         ),
         child: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -61,7 +61,7 @@ class _BookingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.overlayBox,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
@@ -170,7 +170,7 @@ class _BookingCard extends StatelessWidget {
                       text: '4.7',
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: AppColors.text,
                     ),
                   ],
                 ),

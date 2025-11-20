@@ -46,13 +46,15 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
     final state = ref.watch(personalInfoNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg
+      ,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
           surfaceTintColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.bg
+          ,
           elevation: 0,
         ),
       ),
@@ -66,18 +68,18 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
               
               // Header with back button and title
               _buildHeader(),
-              
+
               SizedBox(height: 24.h),
-              
+
               // Profile Summary Card
               _buildProfileSummaryCard(state),
               
-              SizedBox(height: 24.h),
+              // SizedBox(height: 24.h),
+              //
+              // // About Section
+              // _buildAboutSection(state),
               
-              // About Section
-              _buildAboutSection(state),
-              
-              SizedBox(height: 24.h),
+              SizedBox(height: 36.h),
               
               // Form Fields
               _buildFormFields(state),
@@ -97,7 +99,7 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
           onTap: () => context.pop(),
           child: const Icon(
             Icons.arrow_back_ios,
-            color: AppColors.black,
+            color: AppColors.text,
             size: 20,
           ),
         ),
@@ -120,11 +122,11 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         Container(
           padding: EdgeInsets.all(20.w),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: AppColors.overlayBox,
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.12),
+                color: Colors.black.withOpacity(0.40),
                 blurRadius: 4,
                 offset: const Offset(0, 0),
               ),
@@ -133,13 +135,20 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
           child: Row(
             children: [
               // Profile Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(999),
-                child: CommonImage(
-                  imageSrc: AppImages.profile,
-                  width: 80.w,
-                  height: 80.h,
-                  fill: BoxFit.cover,
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border:Border.all(
+                      width: 3,
+                      color: AppColors.subTitle)
+                ),
+                child: ClipOval(
+                  child: CommonImage(
+                    imageSrc: AppImages.profile,
+                    width: 80.w,
+                    height: 80.h,
+                    fill: BoxFit.cover,
+                  ),
                 ),
               ),
               
@@ -181,18 +190,18 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical:8.h),
         decoration: BoxDecoration(
-          color: AppColors.base50,
+          color: AppColors.black900,
           borderRadius: BorderRadius.circular(999),
         ),
         child: Row(
           children: [
-            Icon(Icons.person, color: AppColors.base500, size: 12),
+            Icon(Icons.person_add_rounded, color: AppColors.text, size: 12),
             SizedBox(width: 2.w),
             CommonText(
               text: AppStrings.editProfile,
               fontSize: 10,
               fontWeight: FontWeight.w400,
-              color: AppColors.base500,
+              color: AppColors.text,
             ),
           ],
         ),
@@ -238,8 +247,11 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _fullNameController,
           hintText: AppStrings.fullName,
-          borderColor: AppColors.filledColor,
-          fillColor: AppColors.white,
+          borderColor: AppColors.black,
+          hintTextColor: AppColors.subTitle,
+          fillColor: AppColors.overlayBox,
+          keyboardType: TextInputType.none,
+
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateFullName(value);
@@ -253,8 +265,10 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _emailController,
           hintText: AppStrings.email,
-          borderColor: AppColors.filledColor,
-          fillColor: AppColors.white,
+          borderColor: AppColors.black,
+          hintTextColor: AppColors.subTitle,
+          fillColor: AppColors.overlayBox,
+          keyboardType: TextInputType.none,
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateEmail(value);
@@ -268,8 +282,10 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _addressController,
           hintText: AppStrings.address,
-          borderColor: AppColors.filledColor,
-          fillColor: AppColors.white,
+          borderColor: AppColors.black,
+          hintTextColor: AppColors.subTitle,
+          fillColor: AppColors.overlayBox,
+          keyboardType: TextInputType.none,
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateAddress(value);

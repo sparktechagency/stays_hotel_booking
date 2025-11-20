@@ -1,6 +1,6 @@
 class AppStrings {
   // App/Splash
-  static const String appName = 'STAYS.';
+  static const String appName = 'STAYS';
 
   // Onboarding
   static const String onboardingTitle = 'Up to -70% on all hotels\nworldwide!';
@@ -99,6 +99,7 @@ class AppStrings {
   static const String myBooking = "My booking";
   static const String totalSaved = "Total saved";
   static const String inviteMember = "Invite member";
+  static const String becomeAmbassador = "Become Ambassador";
   static const String setting = "SETTING";
   static const String changePassword = "Change Password";
   static const String language = "Language";
@@ -129,4 +130,82 @@ class AppStrings {
   static const String liamJohnsonFull = "Liam Johnson";
   static const String liamEmailShort = "liam@gmail.com";
   static const String liamAddress = "297 Westheimer Rd. Santa Ana";
+
+  // Total Saved Screen
+  static const String mysticPalms = "Mystic Palms";
+  static const String nightPrice = "/night";
+
+
+  static const String inviteViaEmail = "Invite via email";
+  static const String emailAddress = "Email address";
+  static const String sendInvite = "Send Invite";
+  static const String inviteViaLink = "Invite via link";
+  static const String inviteLink = "https://stays.com/invite/a3f8b.....";
+
+  // Change Password Screen
+
+  static const String currentPassword = "Current Password";
+  static const String newPassword = "New Password";
+  static const String confirmPassword = "Confirm Password";
+  static const String save = "Save";
+  static const String customerSupport = "Customer Support";
+
+ 
+  static const String english = "English";
+  static const String french = "French";
+  static const String german = "German";
+  static const String arabic = "Arabic";
+
+  // FAQ Screen
+  static const String howToMakeReservation = "How do I make a reservation?";
+  static const String canModifyBooking = "Can I modify my booking after it's confirmed?";
+  static const String whatPaymentMethods = "What payment methods do you accept?";
+  static const String isPaymentSecure = "Is my payment information secure?";
+  static const String bookingModificationAnswer = "You can modify bookings in the app under \"My Bookings,\" subject to hotel policy and availability.";
+
+
+  static const String dataNotFound = "DATA NOT FOUND";
+
+  // Logout Dialog
+
+  static const String logoutConfirmation = "Are you sure you want to Logout?";
+  static const String no = "No";
+  static const String yes = "Yes";
+
+  // Notifications Screen
+  static const String notifications = "Notifications";
+  static const String bookingConfirmation = "Booking Confirmation";
+  static const String bookingConfirmationMessage = "Your booking for the Grand Oasis Resort is confirmed.";
+  static const String dateAlert = "Date Alert";
+  static const String dateAlertMessage = "Save 20% on your next stay in Paris.";
+  static const String newMessage = "New Message";
+  static const String newMessageText = "Lam sent you a message about your upcoming trip";
+  static const String travelInspiration = "Travel Inspiration";
+  static const String travelInspirationMessage = "Explore new destinations with our curated travel guides.";
+  static const String twoHoursAgo = "2h";
+  static const String fourHoursAgo = "4h";
+  static const String tenHoursAgo = "10h";
+
+  // Filter Bottom Sheet
+  static const String filterSection = "Filter Section";
+  static const String starRating = "Star Rating";
+  static const String fiveStars = "☆☆☆☆☆";
+  static const String fourStars = "☆☆☆☆";
+  static const String threeStars = "☆☆☆";
+  static const String twoStars = "☆☆";
+  static const String orWithoutStarRating = "Or Without Star Rating";
+  static const String meals = "Meals";
+  static const String noMealsIncluded = "No Meals Included";
+  static const String allInclusive = "All-inclusive";
+  static const String breakfastIncluded = "Breakfast included";
+  static const String breakfastDinnerOrLunch = "Breakfast + Dinner Or Lunch Included";
+  static const String breakfastLunchDinner = "Breakfast, Lunch And Dinner Included";
+  static const String distance = "Distance";
+  static const String noMoreThan = "No more than";
+  static const String kmToCityCenter = "km to the city center";
+  static const String priceFor2Nights = "Price for 2 nights";
+  static const String from = "From";
+  static const String to = "To";
+  static const String clearAll = "Clear all";
+  static const String showOffers = "Show 260 offers";
 }

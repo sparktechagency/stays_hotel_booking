@@ -21,9 +21,9 @@ class CommonButton extends StatelessWidget {
   const CommonButton({
     this.onTap,
     required this.titleText,
-    this.titleColor = AppColors.white,
-    this.buttonColor = AppColors.primaryColor,
-    this.titleSize = 20,
+    this.titleColor = AppColors.black500,
+    this.buttonColor = AppColors.white,
+    this.titleSize = 16,
     this.buttonRadius = 8,
     this.titleWeight = FontWeight.w500,
     this.buttonHeight = 60,

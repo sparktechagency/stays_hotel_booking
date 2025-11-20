@@ -14,9 +14,11 @@ import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_strings.dart';
 import 'package:stays_hotel_booking/core/utils/extensions/extension.dart';
 import 'package:stays_hotel_booking/features/home/presentation/providers/home_provider.dart';
+import 'package:stays_hotel_booking/features/filter/presentation/widgets/filter_bottom_sheet.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
+  
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
@@ -31,13 +33,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: AppBar(
           surfaceTintColor: AppColors.transparent,
           shadowColor: AppColors.transparent,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.bg,
         ),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.black,
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(gradient: AppColors.whiteBgGradient),
+                    decoration: BoxDecoration(color: AppColors.black),
+
+          // decoration: BoxDecoration(gradient: AppColors.whiteBgGradient),
           child: Column(
             children: [
               _buildHeader(),
@@ -71,10 +75,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             fontWeight: FontWeight.w600,
             color: AppColors.base500,
           ),
-          Row(
-            children: [
+             
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CommonText(
                     text: AppStrings.totalSavings,
@@ -91,14 +94,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
               ),
+             
+             
+             
+          Row(
+            children: [
+           
               10.width,
               Row(
                 children: [
-                  CommonImage(
-                    imageSrc: AppIcons.notification,
-                    width: 24.h,
-                    height: 24.h,
-                    fill: BoxFit.fill,
+                  GestureDetector(
+                    onTap: () => context.push(AppRoutes.notifications),
+                    child: CommonImage(
+                      imageSrc: AppIcons.notification,
+                      width: 24.h,
+                      height: 24.h,
+                      fill: BoxFit.fill,
+                    ),
                   ),
                   SizedBox(width: 12.w),
                   const CircleAvatar(
@@ -123,8 +135,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       margin: EdgeInsets.symmetric(horizontal: 24.w),
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.filledColor),
-        color: AppColors.white,
+        border: Border.all(color: AppColors.black400),
+        color: AppColors.overlayBox,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
@@ -139,7 +151,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             CommonTextField(
               hintText: AppStrings.searchDestinations,
               prefixIcon: const Icon(Icons.search, color: AppColors.subTitle),
-              borderColor: AppColors.filledColor,
+              borderColor: AppColors.black400,
               fillColor: AppColors.transparent,
               borderRadius: 8,
               onTap: () => context.push(AppRoutes.searchResults),
@@ -157,7 +169,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     Icons.calendar_month_outlined,
                     color: AppColors.subTitle,
                   ),
-                  borderColor: AppColors.filledColor,
+                  borderColor: AppColors.black400,
                   fillColor: AppColors.transparent,
                   borderRadius: 8,
                   onTap: () async {
@@ -182,7 +194,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     Icons.calendar_month_outlined,
                     color: AppColors.subTitle,
                   ),
-                  borderColor: AppColors.filledColor,
+                  borderColor: AppColors.black400,
                   fillColor: AppColors.transparent,
                   borderRadius: 8,
                   onTap: () async {
@@ -205,7 +217,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             hintText: AppStrings.numberOf,
             controller: TextEditingController(text: guests),
             prefixIcon: const Icon(Icons.people, color: AppColors.subTitle),
-            borderColor: AppColors.filledColor,
+            borderColor: AppColors.black400,
             fillColor: AppColors.transparent,
             borderRadius: 8,
             onChanged: (value) =>
@@ -244,19 +256,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 text: AppStrings.featuredDeals,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: AppColors.black,
+                color: AppColors.text,
               ),
-              Container(
-                width: 32.w,
-                height: 32.h,
-                decoration: BoxDecoration(
-                  color: AppColors.base50,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: const Icon(
-                  Icons.tune,
-                  color: AppColors.base500,
-                  size: 20,
+              GestureDetector(
+                onTap: () => _showFilterBottomSheet(context),
+                child: Container(
+                  width: 32.w,
+                  height: 32.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.overlayBox,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: const Icon(
+                    Icons.tune,
+                    color: AppColors.green,
+                    size: 20,
+                  ),
                 ),
               ),
             ],
@@ -286,14 +301,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildHotelCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.overlayBox,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: AppColors.filledColor),
+       // border: Border.all(color: AppColors.filledColor),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(0.40),
             blurRadius: 4,
-            offset: const Offset(0, 4),
+            offset: const Offset(0, 0),
           ),
         ],
       ),
@@ -370,11 +385,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                       child: const Icon(
                         Icons.favorite_border,
-                        color: AppColors.base500,
+                        color: AppColors.black400,
                         size: 16,
                       ),
                     ),
                   ],
+                  
                 ),
               ),
             ],
@@ -494,6 +510,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showFilterBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const FilterBottomSheet(),
     );
   }
 }

@@ -6,7 +6,7 @@ final plansProvider = Provider<List<Plan>>((ref) {
   return const [
     Plan(
       title: 'GCC plan',
-      priceLabel: '699Aed',
+      priceLabel: '\$49',
       perfectFor: ['New users and those planning a single, simple trip'],
       features: [
         'Full hotels access up to -70% off - Available for: UAE - QATAR - OMAN - SAUDIA - BAHREIN - KUWAIT',
@@ -15,18 +15,7 @@ final plansProvider = Provider<List<Plan>>((ref) {
         'Basic access to the conversational AI assistant for travel questions.',
       ],
     ),
-    Plan(
-      title: 'Worldwide plan',
-      priceLabel: '899Aed',
-      perfectFor: ['New users and those planning a single, simple trip'],
-      features: [
-        'Full hotels access up to -70% off - Available for: UAE - QATAR - OMAN - SAUDIA - BAHREIN - KUWAIT',
-        'Generate 1 sample itinerary',
-        'Earn 1 free full itinerary by successfully inviting 2 friends to the app',
-        'Basic access to the conversational AI assistant for travel questions.',
-      ],
-    ),
-  ];
+ ];
 });
 
 final currentPlanIndexProvider = StateProvider<int>((ref) => 0);

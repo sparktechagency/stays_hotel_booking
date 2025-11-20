@@ -24,23 +24,23 @@ class BookingDetailsScreen extends ConsumerWidget {
       extendBody: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.whiteBgStart,
+        backgroundColor: AppColors.bg,
         centerTitle: true,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,
         leading: IconButton(
           onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.black, size: 20),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.text, size: 20),
         ),
         title: const CommonText(
           text: AppStrings.hotelBlueSkyDetails,
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.black,
+          color: AppColors.text,
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: AppColors.whiteBgGradient),
+        decoration: BoxDecoration(color: AppColors.bg),
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           child: Column(
@@ -60,7 +60,7 @@ class BookingDetailsScreen extends ConsumerWidget {
                         text: 'Hotel Blue sky',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: AppColors.text,
                       ),
                       SizedBox(height: 4),
                       Row(
@@ -100,7 +100,7 @@ class BookingDetailsScreen extends ConsumerWidget {
                               text: isCheckIn ? 'Check In' : AppStrings.pending,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
-                              color: isCheckIn ? const Color(0xFF19A05B) : AppColors.base500,
+                              color: isCheckIn ? const Color(0xFF19A05B) : AppColors.red,
                             ),
                           );
                         },
@@ -116,7 +116,7 @@ class BookingDetailsScreen extends ConsumerWidget {
                 text: AppStrings.bookingInformation,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: AppColors.text,
               ),
               SizedBox(height: 10.h),
 
@@ -162,8 +162,8 @@ class BookingDetailsScreen extends ConsumerWidget {
               child: OutlinedButton(
                 onPressed: () => context.pop(),
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: AppColors.base50,
-                  side:  BorderSide(color: AppColors.base50),
+                  backgroundColor: AppColors.black400,
+                  side:  BorderSide(color: AppColors.subTitle),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                 ),
@@ -171,7 +171,7 @@ class BookingDetailsScreen extends ConsumerWidget {
                   text: 'Cancel',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.base500,
+                  color: AppColors.subTitle,
                 ),
               ),
             ),
@@ -354,9 +354,10 @@ class _PaymentOptions extends ConsumerWidget {
       onTap: () => ref.read(paymentMethodProvider.notifier).state = value,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFFF1F1F1) : AppColors.white,
+          color: isSelected ?
+              AppColors.overlayBox: AppColors.transparent,
           borderRadius: BorderRadius.circular(4.r),
-          border: Border.all(color: isSelected ? Colors.transparent : AppColors.white500),
+          border: Border.all(color: isSelected ? Colors.transparent : AppColors.subTitle),
         ),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
         child: Row(
@@ -376,6 +377,7 @@ class _PaymentOptions extends ConsumerWidget {
               child: Radio<String>(
                 value: value,
                 groupValue: selected,
+                side: BorderSide(color: AppColors.subTitle),
                 onChanged: (v) => ref.read(paymentMethodProvider.notifier).state = v ?? value,
                 activeColor: AppColors.text,
               ),

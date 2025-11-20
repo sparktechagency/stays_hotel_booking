@@ -25,24 +25,24 @@ class _FavoriteScreensState extends State<FavoriteScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         shadowColor: AppColors.transparent,
         elevation: 0,
-        backgroundColor: Color(0xFFFDFBFB),
+        backgroundColor: AppColors.bg,
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: const CommonText(
           text: AppStrings.favourites,
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.black,
+          color: AppColors.text,
         ),
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: AppColors.whiteBgGradient
+          color: AppColors.bg,
         ),
         child: ListView.separated(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -64,11 +64,12 @@ class _FavoriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.overlayBox
+        ,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(0.40),
             blurRadius: 4,
             offset: const Offset(0, 0),
           ),
@@ -118,7 +119,7 @@ class _FavoriteCard extends StatelessWidget {
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.bookmark_border, size: 10, color: AppColors.text),
+                    child: const Icon(Icons.bookmark_border, size: 10, color: AppColors.overlayBox),
                   ),
                 ),
             
@@ -175,7 +176,7 @@ class _FavoriteCard extends StatelessWidget {
                       text: item.rating,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: AppColors.text,
                     ),
 
                     10.width,

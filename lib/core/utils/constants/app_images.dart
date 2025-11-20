@@ -18,8 +18,8 @@ class AppImages {
   static const String hotelBooking3 = "$baseurl/hotel_three.jpeg";
   static const String hotelBooking4 = "$baseurl/hote_booking4.png";
   static const String map = "$baseurl/map.png";
-  static const String bottomBg = "$baseurl/bottom_bg.png";
-  static const String bookingSuccess = "$baseurl/booking_success.png";
+  static const String bottomBg = "$baseurl/bottom_black.png";
+  static const String bookingSuccess = "$baseurl/booking_success_dark.png";
 
   //=========bottom nav bar
   static const String homeActive = "$baseurl/home_active.png";
@@ -37,4 +37,5 @@ class AppImages {
   static const String profileInactive = "$baseurl/profile_inactive.png";
   static const String profileActive = "$baseurl/profile_active.png";
   static const String selectedTop = "$baseurl/selected_top.png";
+  static const String notFound = "$baseurl/not_found.png";
 }

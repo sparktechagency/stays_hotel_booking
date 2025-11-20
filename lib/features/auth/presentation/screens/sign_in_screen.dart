@@ -8,6 +8,7 @@ import 'package:stays_hotel_booking/component/image/common_image.dart';
 import 'package:stays_hotel_booking/component/text/common_text.dart';
 import 'package:stays_hotel_booking/component/text_field/common_text_field.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_colors.dart';
+import 'package:stays_hotel_booking/core/utils/constants/app_icons.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_strings.dart';
 import 'package:stays_hotel_booking/core/utils/helper/other_helper.dart';
@@ -42,7 +43,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.bg,
         // leading: InkWell(
         //   onTap: () => context.pop(),
         //   child: Icon(
@@ -53,7 +54,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         surfaceTintColor: Colors.transparent,
         foregroundColor: AppColors.black,
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
@@ -66,7 +67,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   text: AppStrings.signInTitle, // "Sign in to your\nAccount."
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.black,
+                  color: AppColors.text,
                   bottom: 8,
                   maxLines: 2,
                   textAlign: TextAlign.left,
@@ -86,15 +87,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   text: AppStrings.signInEmailLabel, // "Email"
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: AppColors.text,
                   bottom: 12,
                   textAlign: TextAlign.left,
                 ),
                 CommonTextField(
                   controller: emailCtrl,
                   hintText: AppStrings.signInEmailHint, // "Enter  Email"
-                  borderColor: AppColors.filledColor,
-                  fillColor: AppColors.white,
+                  borderColor: AppColors.black,
+                  fillColor: AppColors.overlayBox,
                   borderRadius: 8,
                   validator: OtherHelper.emailValidator,
 
@@ -108,7 +109,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   text: AppStrings.signInPasswordLabel, // "Password"
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: AppColors.text,
                   bottom: 8,
                   textAlign: TextAlign.left,
                 ),
@@ -117,8 +118,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   hintText: AppStrings.signInPasswordHint, // "Enter Password"
                   isPassword: true,
                   validator: OtherHelper.passwordValidator,
-                  borderColor: AppColors.filledColor,
-                  fillColor: AppColors.white,
+                  borderColor: AppColors.black,
+                  hintTextColor: AppColors.subTitle,
+                  fillColor: AppColors.overlayBox,
                   borderRadius: 8,
                   textInputAction: TextInputAction.done,
                   obscure: ref.watch(signInPasswordObscureProvider),
@@ -221,7 +223,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     Expanded(
                       child: _SocialButton(
                         onTap: () {},
-                        image: AppImages.apple,
+                        image: AppIcons.whiteApple,
                       ),
                     ),
                   ],
@@ -275,7 +277,7 @@ class _SocialButton extends StatelessWidget {
       child: Container(
         height: 60.h,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.overlayBox,
           borderRadius: BorderRadius.circular(8.r),
           boxShadow: [
             BoxShadow(

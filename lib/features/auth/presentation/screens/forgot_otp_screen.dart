@@ -63,10 +63,10 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
 
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.bg,
         leading: IconButton(
           onPressed: () => context.push(AppRoutes.forgotPassword),
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.black),
@@ -90,7 +90,7 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                         text: AppStrings.appName,
                         fontSize: 35,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.base500,
+                        color: AppColors.text,
                       ),
                       SizedBox(height: 16.h),
                               
@@ -148,7 +148,7 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                                 style: TextStyle(
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.black,
+                                  color: AppColors.subTitle,
                                 ),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [
@@ -158,12 +158,13 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                                 decoration: InputDecoration(
                                   filled: true,                                  hintText:"-",
                                   
-                                  fillColor: AppColors.white,
+                                  fillColor: AppColors.overlayBox,
+                                  hintStyle: TextStyle(color: AppColors.subTitle),
                                   contentPadding: EdgeInsets.zero,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.r),
                                     borderSide: BorderSide(
-                                      color: AppColors.filledColor,
+                                      color: AppColors.overlayBox,
                                       width: 1,
                                     ),
                                   ),
@@ -171,7 +172,7 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                                     
                                     borderRadius: BorderRadius.circular(8.r),
                                     borderSide: BorderSide(
-                                      color: AppColors.base500,
+                                      color: AppColors.overlayBox,
                                       width: 1.2,
                                     ),
                                   ),
@@ -191,7 +192,7 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                             text: 'Resend code in  ',
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
-                            color: AppColors.subTitle,
+                            color: AppColors.text,
                           ),
                           GestureDetector(
                             onTap: resend == 0
@@ -201,7 +202,8 @@ class _ForgotOtpScreenState extends ConsumerState<ForgotOtpScreen> {
                               text: resend == 0 ?'Resend':'${resend}s' ,
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
-                              color: resend == 0 ? AppColors.base500 : AppColors.blue,
+                              color:
+                              AppColors.blue,
                             ),
                           ),
                         ],

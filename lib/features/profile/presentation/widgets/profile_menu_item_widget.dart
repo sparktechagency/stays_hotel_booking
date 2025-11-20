@@ -25,7 +25,7 @@ class ProfileMenuItemWidget extends StatelessWidget {
               // Icon
               Icon(
                 menuItem.icon,
-                color: menuItem.isDestructive ? Colors.red : AppColors.black,
+                color: menuItem.isDestructive ? Colors.red : AppColors.subTitle,
                 size: 18.sp,
               ),
               SizedBox(width: 12.w),
@@ -35,14 +35,14 @@ class ProfileMenuItemWidget extends StatelessWidget {
                 fontSize: 14,
                 textAlign: TextAlign.start,
                 fontWeight: FontWeight.w400,
-                color: menuItem.isDestructive ? Colors.red : AppColors.black,
+                color: menuItem.isDestructive ? Colors.red : AppColors.subTitle,
               ),
               // Ar
               //row icon
               Spacer(),
               Icon(
                 Icons.arrow_forward_ios,
-                color: AppColors.text,
+                color: AppColors.subTitle,
                 size: 16.sp,
               ),
             ],
@@ -54,9 +54,10 @@ class ProfileMenuItemWidget extends StatelessWidget {
             thickness: 1,
           
           
-            color: AppColors.white500,
+            color: AppColors.black400,
           ),
       ],
     );
   }
 }
+

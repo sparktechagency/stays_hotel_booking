@@ -33,9 +33,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
     final loading = ref.watch(forgotPasswordLoadingProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.bg,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.black),
@@ -61,7 +61,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     text: AppStrings.appName,
                     fontSize: 35,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.base500,
+                    color: AppColors.text,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 16.h),
@@ -88,7 +88,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     text: 'Email',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.text,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 12.h),
@@ -102,8 +102,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       validator: OtherHelper.emailValidator,
                       onChanged: (v) =>
                           ref.read(forgotPasswordEmailProvider.notifier).state = v,
-                      borderColor: AppColors.filledColor,
-                      fillColor: AppColors.white,
+                      borderColor: AppColors.black,
+                      hintTextColor: AppColors.subTitle,
+                      fillColor: AppColors.overlayBox,
                       borderRadius: 8,
                     ),
                   ),

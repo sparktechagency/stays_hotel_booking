@@ -23,32 +23,32 @@ class HotelDetailsScreen extends ConsumerWidget {
 
 
     return Scaffold(
-      backgroundColor: AppColors.transparent,
+      backgroundColor: AppColors.bg,
 
       extendBody: true,
       appBar: AppBar(
         elevation: 0,
         surfaceTintColor: AppColors.transparent,
         shadowColor: AppColors.transparent,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.bg,
         centerTitle: true,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(
             
             size: 20,
-            Icons.arrow_back_ios, color: AppColors.black),
+            Icons.arrow_back_ios, color: AppColors.text),
         ),
         title: const CommonText(
           text: 'Hotel Blue Sky Details',
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.black,
+          color: AppColors.text,
         ),
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: AppColors.whiteBgGradient
+          color: AppColors.bg
         ),
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
@@ -66,7 +66,7 @@ class HotelDetailsScreen extends ConsumerWidget {
                     text: AppStrings.hotelBlueSky,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.text,
                   ),
                   Row(
                     children: [
@@ -102,7 +102,7 @@ class HotelDetailsScreen extends ConsumerWidget {
                 text: 'Residence Amenities:',
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: AppColors.black,
+                color: AppColors.text,
               ),
               SizedBox(height: 8.h),
               Wrap(
@@ -273,8 +273,9 @@ class HotelDetailsScreen extends ConsumerWidget {
             Icons.calendar_month_outlined,
             color: AppColors.subTitle,
           ),
-          borderColor: AppColors.filledColor,
-          fillColor: AppColors.white,
+          borderColor: AppColors.subTitle,
+          hintTextColor: AppColors.subTitle,
+          fillColor: AppColors.overlayBox,
           borderRadius: 8,
           onTap: () async {
             final date = await showDatePicker(

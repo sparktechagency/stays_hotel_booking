@@ -13,3 +13,4 @@ class ProfileMenuItemModel {
     this.isDestructive = false,
   });
 }
+

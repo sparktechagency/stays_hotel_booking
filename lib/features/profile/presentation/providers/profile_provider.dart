@@ -43,8 +43,16 @@ final personalInfoMenuProvider = Provider<List<ProfileMenuItemModel>>((ref) {
     ),
     ProfileMenuItemModel(
       id: 'invite_member',
-      title: AppStrings.inviteMember,
+      title: AppStrings.becomeAmbassador,
       icon: Icons.person_add,
+   
+    ),
+
+
+       ProfileMenuItemModel(
+      id: 'contact_us',
+      title: AppStrings.customerSupport,
+      icon: Icons.contact_emergency,
    
     ),
   ];

@@ -43,13 +43,13 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
     final searchState = ref.watch(searchNotifierProvider);
     
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
           surfaceTintColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.bg,
           elevation: 0,
         ),
       ),
@@ -94,7 +94,7 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
               text: AppStrings.searchResults,
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: AppColors.black,
+              color: AppColors.text,
             ),
           ),
         ],
@@ -189,11 +189,11 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
   Widget _buildHotelCard(HotelModel hotel) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.overlayBox,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(0.40),
             blurRadius: 4,
             offset: const Offset(0, 0),
           ),
@@ -264,7 +264,7 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
                       text: "4.9",
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: AppColors.text,
                     ),
 
                     10.width,

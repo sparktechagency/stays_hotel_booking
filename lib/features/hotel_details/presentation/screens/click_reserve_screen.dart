@@ -22,22 +22,22 @@ class ClickReserveScreen extends ConsumerWidget {
     final checkOut = ref.watch(checkOutDateProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         elevation: 0,
         surfaceTintColor: AppColors.transparent,
         shadowColor: AppColors.transparent,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.bg,
         centerTitle: true,
         leading: IconButton(
           onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.black, size: 20),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.text, size: 20),
         ),
         title: const CommonText(
           text: 'Hotel Blue Sky Details',
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.black,
+          color: AppColors.text,
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +59,7 @@ class ClickReserveScreen extends ConsumerWidget {
                       text: 'Hotel Blue sky',
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: AppColors.text,
                     ),
                     6.height,
 
@@ -138,7 +138,7 @@ class ClickReserveScreen extends ConsumerWidget {
               child: OutlinedButton(
                 onPressed: () => context.pop(),
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: AppColors.base50,
+                  backgroundColor: AppColors.black400,
                   side:  BorderSide(color: AppColors.base50),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -147,7 +147,7 @@ class ClickReserveScreen extends ConsumerWidget {
                   text: 'Cancel',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.base500,
+                  color: AppColors.subTitle,
                 ),
               ),
             ),
@@ -172,7 +172,7 @@ class ClickReserveScreen extends ConsumerWidget {
   void _showBookingSuccessBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: AppColors.white,
+    backgroundColor: AppColors.overlayBox,
     isScrollControlled: false,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
@@ -200,7 +200,7 @@ class ClickReserveScreen extends ConsumerWidget {
               text: AppStrings.bookingSuccessTitle,
               fontSize: 20,
               fontWeight: FontWeight.w500,
-              color: AppColors.black,
+              color: AppColors.text,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 12.h),
