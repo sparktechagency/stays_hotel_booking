@@ -14,74 +14,40 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class StaysWebViewScreen extends StatefulWidget {
-  const StaysWebViewScreen({super.key});
-
-  @override
-  State<StaysWebViewScreen> createState() => _StaysWebViewScreenState();
-}
-
-class _StaysWebViewScreenState extends State<StaysWebViewScreen> {
-  late final WebViewController _controller;
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
 
 
-
-
-   
-    // _controller = WebViewController()
-    //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //   ..setBackgroundColor(Colors.white)
-    //   ..setNavigationDelegate(
-    //     NavigationDelegate(
-    //       onPageStarted: (url) {
-    //         if (url.contains('/payment/success')) {
-    //           if (!mounted) return;
-    //           context.go(AppRoutes.signIn);
-    //         }
-    //         setState(() => _isLoading = true);
-    //       },
-    //       onPageFinished: (_) {
-    //         if (mounted) setState(() => _isLoading = false);
-    //       },
-    //     ),
-    //   )
-    //   ..loadRequest(Uri.parse('https://stays-app.com'));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(child: WebViewWidget(controller: _controller)),
-          if (_isLoading)
-            const Center(child: CircularProgressIndicator()),
-        ],
-      ),
-    );
-  }
-}
-
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   Timer? _timer;
+  late final AnimationController _animationController;
+  late final Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+
+    _scaleAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutBack,
+    );
+
+    _animationController.forward();
+
     _timer = Timer(const Duration(milliseconds: 1500), () {
       if (!mounted) return;
-      context.go(AppRoutes.registration);
+      context.go(AppRoutes.staysWeb);
     });
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -91,14 +57,18 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration:  BoxDecoration(
-          color: AppColors.bg ),
-        child: const Center(
-          child: CommonText(
-            text: AppStrings.appName,
-            fontSize: 48,
-            fontWeight: FontWeight.w800,
-            color: AppColors.white,
+        decoration: const BoxDecoration(
+          color: AppColors.bg,
+        ),
+        child: Center(
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: const CommonText(
+              text: AppStrings.appName,
+              fontSize: 48,
+              fontWeight: FontWeight.w800,
+              color: AppColors.white,
+            ),
           ),
         ),
       ),

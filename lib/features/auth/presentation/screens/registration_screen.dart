@@ -27,12 +27,14 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
   final _userNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   @override
   void dispose() {
     _userNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -133,7 +135,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                 ),
                 SizedBox(height: 12.h),
                 CommonTextField(
-                  controller: _userNameController,
+                  controller: _phoneNumberController,
                   hintText: "Enter Phone Number",
                   validator: OtherHelper.validator,
                   borderColor: AppColors.black,
@@ -174,7 +176,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
 
-                      context.go(AppRoutes.home);
+                      context.go(AppRoutes.verifyOtpScreen);
                     }
                   },
                 ),
