@@ -188,7 +188,7 @@ class BookingDetailsScreen extends ConsumerWidget {
                     buttonHeight: 38,
                     onTap: () {
                       if (isCheckIn) {
-                        context.push(AppRoutes.bookingPayment);
+                      //  context.push(AppRoutes.bookingPayment);
                       } else {
                         ref.read(bookingStatusProvider.notifier).state = 'check_in';
                         context.pop();

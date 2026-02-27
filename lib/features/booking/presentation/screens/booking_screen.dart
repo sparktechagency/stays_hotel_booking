@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stays_hotel_booking/component/bottomNav/common_bottom_nav_bar.dart';
 import 'package:stays_hotel_booking/component/image/common_image.dart';
-import 'package:stays_hotel_booking/app/app_router.dart';
-import 'package:go_router/go_router.dart';
 import 'package:stays_hotel_booking/component/text/common_text.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_colors.dart';
 import 'package:stays_hotel_booking/core/utils/constants/app_images.dart';
 import 'package:stays_hotel_booking/core/utils/extensions/extension.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stays_hotel_booking/features/booking/presentation/providers/booking_details_provider.dart';
 
-class BookingScreen extends ConsumerWidget {
+class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: PreferredSize(
@@ -43,9 +39,7 @@ class BookingScreen extends ConsumerWidget {
         child: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           itemCount: 1,
-          itemBuilder: (context, index) => _BookingCard(
-            onTap: () => context.push(AppRoutes.bookingDetails),
-          ),
+          itemBuilder: (context, index) => const _BookingCard(),
         ),
       ),
       bottomNavigationBar: const CommonBottomNavBar(currentIndex: 1),
@@ -54,8 +48,7 @@ class BookingScreen extends ConsumerWidget {
 }
 
 class _BookingCard extends StatelessWidget {
-  final VoidCallback? onTap;
-  const _BookingCard({this.onTap});
+  const _BookingCard();
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +66,9 @@ class _BookingCard extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.all(8.w),
-        child: InkWell(
-          onTap: onTap,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Stack(
               children: [
                 ClipRRect(
@@ -180,30 +171,23 @@ class _BookingCard extends StatelessWidget {
                       
                
             
-                Consumer(
-                  builder: (context, ref, _) {
-                    final status = ref.watch(bookingStatusProvider);
-                    final isCheckIn = status == 'check_in';
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                      decoration: BoxDecoration(
-                        color: isCheckIn ? const Color(0xFFE8F7EF) : const Color(0xFFFFEFEF),
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: CommonText(
-                        text: isCheckIn ? 'Check In' : 'Pending',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: isCheckIn ? const Color(0xFF19A05B) : const Color(0xFFFF4D4F),
-                      ),
-                    );
-                  },
-                ),
+                 Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                          decoration: BoxDecoration(
+            color: const Color(0xFFFFEFEF),
+            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: const CommonText(
+            text: 'Pending',
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFFFF4D4F),
+                          ),
+                        ),
                         8.height,
               ],
             ),
-            ],
-          ),
+          ],
         ),
       ),
     );

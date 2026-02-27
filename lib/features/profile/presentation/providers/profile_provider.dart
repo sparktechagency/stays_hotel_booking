@@ -17,42 +17,53 @@ final userProfileProvider = StateProvider<UserModel>((ref) {
 // Personal Information menu items provider
 final personalInfoMenuProvider = Provider<List<ProfileMenuItemModel>>((ref) {
   return [
-      ProfileMenuItemModel(
-        id: 'profile',
-        title: AppStrings.myProfile,
-        icon: Icons.person,
-      
-      ),
+    ProfileMenuItemModel(
+      id: 'profile',
+      title: AppStrings.myProfile,
+      icon: Icons.person,
+      onTap: () {
+        // TODO: Navigate to profile edit
+      },
+    ),
     ProfileMenuItemModel(
       id: 'my_plan',
       title: AppStrings.myPlan,
       icon: Icons.account_balance_wallet,
-  
+      onTap: () {
+        // TODO: Navigate to subscription plan
+      },
     ),
     ProfileMenuItemModel(
       id: 'my_booking',
       title: AppStrings.myBooking,
       icon: Icons.calendar_today,
-    
+      onTap: () {
+        // TODO: Navigate to booking list
+      },
     ),
     ProfileMenuItemModel(
       id: 'total_saved',
       title: AppStrings.totalSaved,
       icon: Icons.bookmark,
-    
+      onTap: () {
+        // TODO: Navigate to saved items
+      },
     ),
     ProfileMenuItemModel(
       id: 'invite_member',
       title: AppStrings.becomeAmbassador,
       icon: Icons.person_add,
-   
+      onTap: () {
+        // TODO: Navigate to invite screen
+      },
     ),
 
 
        ProfileMenuItemModel(
       id: 'contact_us',
+
       title: AppStrings.customerSupport,
-      icon: Icons.contact_emergency,
+      icon: Icons.contact_emergency, onTap: () {  },
    
     ),
   ];
@@ -65,44 +76,58 @@ final settingsMenuProvider = Provider<List<ProfileMenuItemModel>>((ref) {
       id: 'change_password',
       title: AppStrings.changePassword,
       icon: Icons.lock,
- 
+      onTap: () {
+        // TODO: Navigate to change password
+      },
     ),
     ProfileMenuItemModel(
       id: 'language',
       title: AppStrings.language,
       icon: Icons.language,
- 
+      onTap: () {
+        // TODO: Navigate to language settings
+      },
     ),
     ProfileMenuItemModel(
       id: 'faq',
       title: AppStrings.faq,
       icon: Icons.help_outline,
- 
+      onTap: () {
+        // TODO: Navigate to FAQ
+      },
     ),
     ProfileMenuItemModel(
       id: 'about_us',
       title: AppStrings.aboutUs,
       icon: Icons.info_outline,
- 
+      onTap: () {
+        // TODO: Navigate to about us
+      },
     ),
     ProfileMenuItemModel(
       id: 'privacy_policy',
       title: AppStrings.privacyPolicy,
       icon: Icons.privacy_tip_outlined,
- 
+      onTap: () {
+        // TODO: Navigate to privacy policy
+      },
     ),
     ProfileMenuItemModel(
       id: 'terms_conditions',
       title: AppStrings.termsConditions,
       icon: Icons.description_outlined,
- 
+      onTap: () {
+        // TODO: Navigate to terms and conditions
+      },
     ),
     ProfileMenuItemModel(
       id: 'logout',
       title: AppStrings.logout,
       icon: Icons.logout,
       isDestructive: true,
- 
+      onTap: () {
+        // TODO: Handle logout
+      },
     ),
   ];
 });
@@ -116,12 +141,12 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
   }
 
   void handleMenuTap(ProfileMenuItemModel menuItem) {
- //   menuItem.onTap();
+    menuItem.onTap();
   }
 
   void logout() {
     state = state.copyWith(isLoading: true);
-   
+    // TODO: Implement logout logic
     Future.delayed(const Duration(seconds: 1), () {
       state = state.copyWith(isLoading: false);
     });
@@ -148,6 +173,7 @@ class ProfileState {
   }
 }
 
+// Provider for profile notifier
 final profileNotifierProvider = StateNotifierProvider<ProfileNotifier, ProfileState>((ref) {
   return ProfileNotifier();
 });

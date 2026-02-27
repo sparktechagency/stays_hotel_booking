@@ -67,7 +67,7 @@ class MyBookingScreenFixed extends StatelessWidget {
               CommonButton(
                 titleText: 'Pay Now',
                 buttonHeight: 46,
-                onTap: () => context.push(AppRoutes.bookingPayment),
+              //  onTap: () => context.push(AppRoutes.bookingPayment),
               ),
               12.height,
               OutlinedButton(
