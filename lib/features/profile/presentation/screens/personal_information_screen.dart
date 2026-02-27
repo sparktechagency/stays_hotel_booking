@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stays_hotel_booking/app/app_router.dart';
 import 'package:stays_hotel_booking/component/button/common_button.dart';
 import 'package:stays_hotel_booking/component/image/common_image.dart';
 import 'package:stays_hotel_booking/component/text/common_text.dart';
@@ -46,15 +45,13 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
     final state = ref.watch(personalInfoNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.bg
-      ,
+      backgroundColor: AppColors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
           surfaceTintColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          backgroundColor: AppColors.bg
-          ,
+          backgroundColor: AppColors.white,
           elevation: 0,
         ),
       ),
@@ -68,18 +65,18 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
               
               // Header with back button and title
               _buildHeader(),
-
+              
               SizedBox(height: 24.h),
-
+              
               // Profile Summary Card
               _buildProfileSummaryCard(state),
               
-              // SizedBox(height: 24.h),
-              //
-              // // About Section
-              // _buildAboutSection(state),
+              SizedBox(height: 24.h),
               
-              SizedBox(height: 36.h),
+              // About Section
+              _buildAboutSection(state),
+              
+              SizedBox(height: 24.h),
               
               // Form Fields
               _buildFormFields(state),
@@ -99,17 +96,17 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
           onTap: () => context.pop(),
           child: const Icon(
             Icons.arrow_back_ios,
-            color: AppColors.text,
+            color: AppColors.black,
             size: 20,
           ),
         ),
         SizedBox(width: 16.w),
         const Expanded(
           child: CommonText(
-            text: AppStrings.personalInformationTitle,
+            text: AppStrings.personalInformation,
             fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: AppColors.text,
+            fontWeight: FontWeight.w700,
+            color: AppColors.black,
           ),
         ),
       ],
@@ -117,118 +114,88 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
   }
 
   Widget _buildProfileSummaryCard(PersonalInfoState state) {
-    return Stack(
-      children: [
-        Container(
-          padding: EdgeInsets.all(20.w),
-          decoration: BoxDecoration(
-            color: AppColors.overlayBox,
-            borderRadius: BorderRadius.circular(12.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.40),
-                blurRadius: 4,
-                offset: const Offset(0, 0),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              // Profile Image
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border:Border.all(
-                      width: 3,
-                      color: AppColors.subTitle)
-                ),
-                child: ClipOval(
-                  child: CommonImage(
-                    imageSrc: AppImages.profile,
-                    width: 80.w,
-                    height: 80.h,
-                    fill: BoxFit.cover,
-                  ),
-                ),
-              ),
-              
-              SizedBox(width: 16.w),
-              
-              // User Info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CommonText(
-                      text: state.user.name,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.text,
-                    ),
-                    SizedBox(height: 8.h),
-                    CommonText(
-                      text: state.user.email,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.subTitle,
-                    ),
-                  ],
-                ),
-              ),
-              
-          ],
-          ),
-        ),
-     
-     
-     
-     Positioned(
-      bottom: 8,
-      right: 8,
-      child: GestureDetector(
-        onTap: () => context.push(AppRoutes.editProfile),
-        child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical:8.h),
-        decoration: BoxDecoration(
-          color: AppColors.black900,
-          borderRadius: BorderRadius.circular(999),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.person_add_rounded, color: AppColors.text, size: 12),
-            SizedBox(width: 2.w),
-            CommonText(
-              text: AppStrings.editProfile,
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
-              color: AppColors.text,
-            ),
-          ],
-        ),
-             ),
-      ))
-     
-      ],
-    );
-  }
-
-  Widget _buildAboutSection(PersonalInfoState state) {
     return Container(
-      padding: EdgeInsets.all(12.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.12),
-            blurRadius: 4,
-            offset: const Offset(0, 0),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Profile Image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: CommonImage(
+              imageSrc: AppImages.profile,
+              width: 80.w,
+              height: 80.h,
+              fill: BoxFit.cover,
+            ),
+          ),
+          
+          SizedBox(width: 16.w),
+          
+          // User Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CommonText(
+                  text: state.user.name,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.black,
+                ),
+                SizedBox(height: 4.h),
+                CommonText(
+                  text: state.user.email,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.subTitle,
+                ),
+              ],
+            ),
+          ),
+          
+          // Edit Profile Button
+          CommonButton(
+            titleText: AppStrings.editProfile,
+            buttonHeight: 36,
+            buttonWidth: 100,
+            titleSize: 12,
+            onTap: () {
+              ref.read(personalInfoNotifierProvider.notifier).toggleEditing();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAboutSection(PersonalInfoState state) {
+    return Container(
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: CommonText(
         text: state.about,
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: AppColors.subTitle,
         maxLines: 10,
@@ -247,11 +214,8 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _fullNameController,
           hintText: AppStrings.fullName,
-          borderColor: AppColors.black,
-          hintTextColor: AppColors.subTitle,
-          fillColor: AppColors.overlayBox,
-          keyboardType: TextInputType.none,
-
+          borderColor: AppColors.filledColor,
+          fillColor: AppColors.white,
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateFullName(value);
@@ -265,10 +229,8 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _emailController,
           hintText: AppStrings.email,
-          borderColor: AppColors.black,
-          hintTextColor: AppColors.subTitle,
-          fillColor: AppColors.overlayBox,
-          keyboardType: TextInputType.none,
+          borderColor: AppColors.filledColor,
+          fillColor: AppColors.white,
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateEmail(value);
@@ -282,10 +244,8 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
         CommonTextField(
           controller: _addressController,
           hintText: AppStrings.address,
-          borderColor: AppColors.black,
-          hintTextColor: AppColors.subTitle,
-          fillColor: AppColors.overlayBox,
-          keyboardType: TextInputType.none,
+          borderColor: AppColors.filledColor,
+          fillColor: AppColors.white,
           borderRadius: 8,
           onChanged: (value) {
             ref.read(personalInfoNotifierProvider.notifier).updateAddress(value);
@@ -333,8 +293,8 @@ class _PersonalInformationScreenState extends ConsumerState<PersonalInformationS
     return CommonText(
       text: label,
       fontSize: 16,
-      fontWeight: FontWeight.w500,
-      color: AppColors.text,
+      fontWeight: FontWeight.w700,
+      color: AppColors.black,
     );
   }
 

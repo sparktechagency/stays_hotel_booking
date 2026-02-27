@@ -104,7 +104,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () => context.push(AppRoutes.notifications),
+                  //  onTap: () => context.push(AppRoutes.),
                     child: CommonImage(
                       imageSrc: AppIcons.notification,
                       width: 24.h,

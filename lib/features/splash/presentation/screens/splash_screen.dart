@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _timer = Timer(const Duration(milliseconds: 1500), () {
       if (!mounted) return;
-      context.go(AppRoutes.staysWeb);
+      //context.go(AppRoutes.staysWeb);
     });
   }
 

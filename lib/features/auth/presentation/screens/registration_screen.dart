@@ -176,7 +176,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
 
-                      context.go(AppRoutes.verifyOtpScreen);
+                    //  context.go(AppRoutes.verifyOtpScreen);
                     }
                   },
                 ),

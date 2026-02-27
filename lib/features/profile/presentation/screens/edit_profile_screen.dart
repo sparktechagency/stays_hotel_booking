@@ -193,7 +193,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final picker = ImagePicker();
     final XFile? file = await picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
     if (file != null) {
-      ref.read(personalInfoNotifierProvider.notifier).updateProfileImage(file.path);
+     // ref.read(personalInfoNotifierProvider.notifier).updateProfileImage(file.path);
       if (mounted) setState(() {});
     }
   }

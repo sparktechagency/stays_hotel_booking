@@ -12,7 +12,6 @@ import 'package:stays_hotel_booking/app/app_router.dart';
 import 'package:stays_hotel_booking/features/profile/domain/models/user_model.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/providers/profile_provider.dart';
 import 'package:stays_hotel_booking/features/profile/presentation/widgets/profile_menu_item_widget.dart';
-import 'package:stays_hotel_booking/core/widgets/logout_dialog.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -30,49 +29,45 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final settingsMenu = ref.watch(settingsMenuProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.bg
-      ,
+      backgroundColor: AppColors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
           surfaceTintColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          backgroundColor: AppColors.bg,
+          backgroundColor: AppColors.white,
           elevation: 0,
         ),
       ),
       body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(color: AppColors.bg),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 16.h),
-          
-                // User Profile Header
-                _buildUserProfileHeader(user),
-          
-                SizedBox(height: 16.h),
-          
-                // Personal Information Section Card
-                _buildMenuCard(
-                  title: AppStrings.personalInformation,
-                  items: personalInfoMenu,
-                ),
-          
-                SizedBox(height: 16.h),
-          
-                // Settings Section Card
-                _buildMenuCard(
-                  title: AppStrings.setting,
-                  items: settingsMenu,
-                ),
-          
-                SizedBox(height: 24.h),
-              ],
-            ),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 16.h),
+
+              // User Profile Header
+              _buildUserProfileHeader(user),
+
+              SizedBox(height: 16.h),
+
+              // Personal Information Section Card
+              _buildMenuCard(
+                title: AppStrings.personalInformation,
+                items: personalInfoMenu,
+              ),
+
+              SizedBox(height: 16.h),
+
+              // Settings Section Card
+              _buildMenuCard(
+                title: AppStrings.setting,
+                items: settingsMenu,
+              ),
+
+              SizedBox(height: 24.h),
+            ],
           ),
         ),
       ),
@@ -84,11 +79,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: AppColors.overlayBox,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.40),
+            color: Colors.black.withOpacity(0.15),
             blurRadius: 4,
             offset: const Offset(0, 0),
           ),
@@ -116,7 +111,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   text: user.name,
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.text,
+                  color: AppColors.black,
                 ),
                 SizedBox(height: 2.h),
                 CommonText(
@@ -136,16 +131,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget _buildMenuCard({required String title, required List<dynamic> items}) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.overlayBox,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.4),
-            offset: const Offset(0, 0),
-            blurRadius: 4,
-          ),
-        ],
-        //border: Border.all(color: AppColors.white500),
-
+        color: AppColors.white,
+        border: Border.all(color: AppColors.white500),
         borderRadius: BorderRadius.circular(12.r),
      ),
       child: Column(
@@ -158,7 +145,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               text: title.toUpperCase(),
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: AppColors.text,
+              color: AppColors.black,
             ),
           ),
           3.height,
@@ -174,7 +161,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
            ...List.generate(
              items.length,
              (index) => GestureDetector(
-               onTap: () => _handleMenuTap(title,index,items[index]),
+               onTap: () => _handleMenuTap(index,items[index]),
                child: ProfileMenuItemWidget(
                  menuItem: items[index],
                  isLastItem: index == items.length - 1,
@@ -186,64 +173,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  void _handleMenuTap(String title, int index,dynamic menuItem) {
+  void _handleMenuTap(int index,dynamic menuItem) {
 
-    if(title == AppStrings.personalInformation){
-      if (index == 0) {
+
+    if (index == 0) {
       context.push(AppRoutes.personalInformation);
-    } else if(index == 1) {
-      context.push(AppRoutes.myPlan);
+    } else {
     
-   
+      menuItem.onTap();
     }
-    else if(index == 2) {
-      context.push(AppRoutes.myBooking);
-    }
-    else if(index == 3) {
-      context.push(AppRoutes.totalSaved);
-    }
-    else if(index == 4) {
-      context.push(AppRoutes.inviteMember);
-    }
-    }
-    else if(title == AppStrings.setting) {
-      if (index == 0) { // Change Password
-        context.push(AppRoutes.changePassword);
-      }
-      else if (index == 1) { // Language
-        context.push(AppRoutes.language);
-      }
-      else if (index == 2) { // FAQ
-        context.push(AppRoutes.faq);
-      }
-      else if (index == 3) { // About Us
-        context.push(AppRoutes.aboutUs);
-      }
-      else if (index == 4) { // Privacy Policy
-        context.push(AppRoutes.privacyPolicy);
-      }
-      else if (index == 5) { // Terms & Conditions
-        context.push(AppRoutes.termsConditions);
-      }
-      else if (index == 6) { // Logout
-        _showLogoutDialog(context);
-      }
-      // Add other settings menu items here as needed
-    }
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const LogoutDialog();
-      },
-    ).then((confirmed) {
-      if (confirmed == true) {
-        // Navigate to sign-in screen
-        context.go(AppRoutes.signIn);
-      }
-    });
   }
 }

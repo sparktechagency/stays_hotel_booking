@@ -93,7 +93,6 @@ class AppStrings {
   static const String liamJohnson = "Liam Johnson";
   static const String liamEmail = "liamjohnson@gmail.com";
   static const String personalInformation = "PERSONAL INFORMATION";
-  static const String personalInformationTitle = "Personal Information";
   static const String myProfile = "Profile";
   static const String myPlan = "My Plan";
   static const String myBooking = "My booking";
