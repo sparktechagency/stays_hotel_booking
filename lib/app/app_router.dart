@@ -7,6 +7,7 @@ import 'package:stays_hotel_booking/features/auth/presentation/screens/sign_in_o
 import 'package:stays_hotel_booking/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:stays_hotel_booking/features/auth/presentation/screens/forgot_otp_screen.dart';
+import 'package:stays_hotel_booking/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_payment_screen.dart';
 import 'package:stays_hotel_booking/features/booking/presentation/screens/booking_details_screen.dart';
@@ -32,6 +33,7 @@ import 'package:stays_hotel_booking/features/subscription/presentation/screens/s
 import 'package:stays_hotel_booking/features/my_plan/presentation/screens/my_plan_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/hotel_details_screen.dart';
 import 'package:stays_hotel_booking/features/hotel_details/presentation/screens/click_reserve_screen.dart';
+import 'package:stays_hotel_booking/features/webview/presentations/screens/stay_webview_screen.dart';
 
 class AppRoutes {
   // Route names
@@ -39,6 +41,7 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String signInOrRegister = '/sign-in-or-register';
   static const String registration = '/registration';
+  static const String verifyOtpScreen = '/verifyOtpScreen';
   static const String home = '/home';
   static const String subscription = '/subscription';
   static const String signIn = '/sign-in';
@@ -117,6 +120,15 @@ class AppRoutes {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: const RegistrationScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: verifyOtpScreen,
+        name: 'verifyOtpScreen',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const VerifyOtpScreen(),
         ),
       ),
       GoRoute(
